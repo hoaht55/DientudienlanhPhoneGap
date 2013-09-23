@@ -1,233 +1,91 @@
-﻿<!DOCTYPE html>
-<html>
+﻿<html>
 	<head>
 		<title>Demo</title>
-		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css" /> 
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
+		<link rel="stylesheet" href="css/style.css"/> 
 		<script type="text/javascript" charset="utf-8" src="js/cordova.js"></script>
-		<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-		<script type="text/javascript" src="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script>
-		<script type="text/javascript">
-
-			jsonProducts="";
-
-			//define function getJson(): read json to url.
-			function getJson()
-			{
-				var urls= "http://203.113.130.218:50080/dtdl/api/all_products.php?callback=?";
-				console.log("url: " + urls );
-				$.ajax({// cau lenh ajax POST vs usernam password
-				dataType: "json",
-				url: urls,
-				type: "GET",
-				success: function( data){ // get read data from json to database with nameTable MARKSTUDENT
-					console.log(data);
-					jsonProducts=data;
-					startCreate();
-				},
-				error: function(xhr, textStatus, error){
-					alert("Erorr mark");
-				}
-				});// end ajax
-				
-			}
-
-			//-------------------------------------------------
-			function startCreate() {
-				var db = window.openDatabase("Database", "1.0", "PhoneGap Demo", 2000000);
-				db.transaction(createTable, errorCB);
-				console.log("B0");
-			}
-			//---------------------------------------------
-			//create table Products
-			function createTable(tx) {
-				tx.executeSql('DROP TABLE IF EXISTS PRODUCTS');
-				tx.executeSql('CREATE TABLE IF NOT EXISTS PRODUCTS (id int, catid int, name text, price text, image text, introtext text, fulltext text )');
-				//tx.executeSql('CREATE TABLE IF NOT EXISTS PRODUCTS (id int, name text, image text)');
-				
-				// loop to read data from jsonObject to create table
-					for (var i in jsonProducts){
-						
-						tx.executeSql('INSERT INTO PRODUCTS (id, catid, name, price, image, introtext, fulltext) VALUES ("'+jsonProducts[i].id+'", "'+jsonProducts[i].catid+'","'+jsonProducts[i].name+'", "'+jsonProducts[i].price+'", "'+jsonProducts[i].image+'", "'+jsonProducts[i].introtext+'", "'+jsonProducts[i].fulltext+'")');
-
-				}// end for 
-				//console.log("B2");
-			}//
-
-			//------------------------
-			//
-			function errorCB(err) {
-				console.log("Error processing SQL 1: "+err.code);
-			}
-
-			//-----------------
-			// read from data base
-			function readDatabases() {
-				var db = window.openDatabase("Database", "1.0", "PhoneGap Demo", 2000000);
-				
-				db.transaction(queryDB, errorRead);
-				getJson();
-			}
-
-			function queryDB( tx )
-			{
-				tx.executeSql('SELECT * FROM PRODUCTS', [], querySuccess, errorCB);
-			}
-
-			function querySuccess( tx,results )
-			{
-
-				var playerlist = document.getElementById("category");
-				var players = "";
-				
-				var len = results.rows.length;
-				for (var i=0; i<len; i++){
-				    	console.log("Row " + (i+1));
-						console.log( results.rows.item(i).id + "   " + results.rows.item(i).image + "   " + results.rows.item(i).name);
-					   // alert(results.rows.item(i).Name + result.rows.item(i).Club);
-					players = players + 
-								'<li><a href="#"><img src="http://203.113.130.218:50080/dtdl/'+results.rows.item(i).image+'" class="ui-li-thumb" /><h3 class="ui-li-heading">'+results.rows.item(i).name +'</h3></a></li>';
-				 }   
-
-				 playerlist.innerHTML = players;
-				 $("#category").listview();
-			/*	$('#category').empty();
-				$.each(results.rows,function(index){
-					var row = results.rows.item(index);
-					$('#category').append('<li><a href="#"><img src="http://203.113.130.218:50080/dtdl/'+row['image']+'" class="ui-li-thumb" /><h3 class="ui-li-heading">'+row['name']+'</h3><p class="ui-li-desc">: '+row['id']+'</p></a></li>');
-				});
-
-				$('#category').listview();*/
-				
-			}
-
-			// read error
-			function errorRead( error)
-			{
-				Console.log("errorRead : " + error.code );
-			}
-
-			//--------------------------------------------------------------
-
-		</script>
-	</head>
-	
-	<body>
-		<div data-role="page">
-			<div data-role="header" data-position="fixed" data-theme="b">
-			   <h1>Sản phẩm</h1>
-			   <button onclick="readDatabases()">Show data</button> 
-			</div>
-			<div data-role="content">
-			   <ul id="category">
-			   </ul>
-			</div>
-			<!-- <button onclick="getJson()">GetJson</button> -->
-			
-		</div>
-	</body>
-</html>
-
-
-
-
-<!-- <!DOCTYPE html>
-<html>
-	<head>
-		<title>Demo</title>
-		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css" /> 
-		<script type="text/javascript" charset="utf-8" src="js/cordova.js"></script>
-		<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-		<script type="text/javascript" src="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script>
-		<script type="text/javascript" src="js/demo.js"></script>
-	</head>
-	
-	<body>
-		<div data-role="page">
-			<div data-role="header" data-position="fixed" data-theme="b">
-			   <h1>Sản phẩm</h1>
-			   <button onclick="readDatabases()">Show data</button> 
-			</div>
-			<div data-role="content">
-			   <ul id="category">
-			   </ul>
-			</div>
-			<button onclick="getJson()">GetJson</button>
-			
-		</div>
-	</body>
-</html>
-
-
-
-
-
-
-
-
-<!DOCTYPE HTML>
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>Máy tính bàn</title>
-    <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1" />
-	<link rel="stylesheet" href="css/style.css"/>
-	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css" /> 
-	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>	
-	<script src="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script>
-</head>
-<body> 
-    <div data-role="page">
-        <div data-role="header">
-			<a href="category.html" data-role="button" data-icon="back"  data-theme="a" data-inline="true">Back</a>
-            <h1>
-                Điện tử
-            </h1>
-			
-			<div data-role="navbar">
-				<ul>
-					<li><a href="maytinhban.html" data-role="button" data-icon="grid" data-iconpos="notext" data-theme="b">Máy tính bàn</a></li>
-                    <li><a href="maytinhcanhan.html"  data-role="button" data-icon="grid" data-iconpos="notext" data-theme="b">Máy tính cá nhân</a></li>
-					<li><a href="maytinhbang.html"  data-role="button" data-icon="grid" data-iconpos="notext" data-theme="b">Máy tính bảng</a></li>
-                   
-                </ul> 
-            </div>
-        </div> end header
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+		<script type="text/javascript" src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+		<script type="text/javascript" src="js/main.js"></script> 
 		
-        <div data-role="content">
-				<div class="content-primary" id="maytinhban"> 
-					<ul  data-role="listview" data-inset="true"data-filter="true" data-filter-placeholder="Search..." >
-					</ul>
-					 <script type="text/javascript">
-						$(document).bind('pageinit', function() {
-							$.getJSON("http://203.113.130.218:50080/dtdl/api/all_products.php?callback=?",function(result){
-								$.each(result, function(i, field){
-									if (field.catid == 8) {
-										$('#maytinhban').children('ul').append(
-										'<li><a href="#'+field.id+'" data-rel="popup" data-position-to="window" data-transition="pop"><img src="http://203.113.130.218:50080/dtdl/'+field.image+'" class="ui-li-thumb" />'+
-										'<h4>'+field.name+ '</h4>'+
-										'<div class="cost" >Giá:' + field.price + 'VNĐ</div>'+
-										'<p class="introtext">'+field.introtext+'</p>'+'</a>'+
-										'<div data-role="popup" id="'+field.id+'" class="ui-content mypopup" data-theme="b">'+
-										//    '<a href="#" data-rel="back" data-role="button" data-theme="c" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>'+'<div class="image"><img src="http://203.113.130.218:50080/dtdl/'+field.image+'" width="200px" height="300px"/></div>'+ '<div class="full_text">'+ field.fulltext +'</div>'+'</div></li>').listview('refresh');
-										'<div class="full_text">'+ field.fulltext +'</div>'+'</li>').listview('refresh');
-									}
-								});
-								$('div.mypopup').popup();
-							});
-						});	
-					/*	var serviceURL = "http://203.113.130.218:50080/dtdl/api/all_products.php?callback=?";
-							$.getJSON(serviceURL,function(data) {
-								$.each(data, function(index,item) {
-									if (item.catid == 8) {
-										$('#dientunew').append('<li><a href="list_dientu.html"><h4>'+ item.name +'</h4></a></li>');
-									}
-								});
-								$('#dientunew').listview('refresh');
-							}); */
-					</script>
-				</div>
-			</div>end content
+	</head>
+	<body onload="readDatabases()">
+		<div data-role="page" id="page1">
+	        <div data-role="header">
+				<a href="category.html" data-role="button" data-icon="back"  data-theme="a" data-inline="true">Back</a>
+	            <h1>
+	                Điện tử
+	            </h1>
 				
-	</div>end page1
-</body>
-</html> -->
+				<div data-role="navbar">
+					<ul>
+						<li><a href="#" onclick="goDesktop()" data-role="button" data-icon="grid" data-iconpos="notext" data-theme="b">Máy tính bàn</a></li>
+	                    <li><a href="#" onclick="goLaptop()" data-role="button" data-icon="grid" data-iconpos="notext" data-theme="b">Máy tính cá nhân</a></li>
+						<li><a href="#" onclick="goTablet()" data-role="button" data-icon="grid" data-iconpos="notext" data-theme="b">Máy tính bảng</a></li>
+	                   
+	                </ul> 
+	            </div>
+	        </div> <!--end header -->
+			
+	       <div data-role="content">
+				<div class="content-primary" id="maytinhban"> 
+						<!-- <ul  data-role="listview" data-inset="true" data-filter="true" data-filter-placeholder="Search..." >
+						</ul>  -->
+				</div>
+			</div><!-- end content -->		
+		</div><!-- end page1 -->
+		
+		
+<!-- 		<div data-role="page" id="page2">
+	        <div data-role="header">
+				<a href="category.html" data-role="button" data-icon="back"  data-theme="a" data-inline="true">Back</a>
+	            <h1>
+	                Điện tử
+	            </h1>
+				
+				<div data-role="navbar">
+					<ul>
+						<li><a href="#page1" data-role="button" data-icon="grid" data-iconpos="notext" data-theme="b">Máy tính bàn</a></li>
+	                    <li><a href="#page2"  data-role="button" data-icon="grid" data-iconpos="notext" data-theme="b">Máy tính cá nhân</a></li>
+						<li><a href="#page3"  data-role="button" data-icon="grid" data-iconpos="notext" data-theme="b">Máy tính bảng</a></li>
+	                   
+	                </ul> 
+	            </div>
+	        </div> end header
+			
+	        <div data-role="content">
+				<div class="content-primary" id="maytinhcanhan"> 
+						<ul  data-role="listview" data-inset="true" data-filter="true" data-filter-placeholder="Search..." >
+						</ul> 
+				</div>
+			</div>end content		
+		</div>end page2
+		
+		
+		<div data-role="page" id="page3">
+	        <div data-role="header">
+				<a href="category.html" data-role="button" data-icon="back"  data-theme="a" data-inline="true">Back</a>
+	            <h1>
+	                Điện tử
+	            </h1>
+				
+				<div data-role="navbar">
+					<ul>
+						<li><a href="#page1" data-role="button" data-icon="grid" data-iconpos="notext" data-theme="b">Máy tính bàn</a></li>
+	                    <li><a href="#page2"  data-role="button" data-icon="grid" data-iconpos="notext" data-theme="b">Máy tính cá nhân</a></li>
+						<li><a href="#page3"  data-role="button" data-icon="grid" data-iconpos="notext" data-theme="b">Máy tính bảng</a></li>
+	                   
+	                </ul> 
+	            </div>
+	        </div> end header
+			
+	        <div data-role="content">
+				<div class="content-primary" id="maytinhbang"> 
+						<ul  data-role="listview" data-inset="true" data-filter="true" data-filter-placeholder="Search..." >
+						</ul> 
+				</div>
+			</div>end content		
+		</div>end page3 -->
+	</body>
+	
+</html>

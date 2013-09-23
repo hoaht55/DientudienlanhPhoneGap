@@ -6,9 +6,10 @@
 		<script type="text/javascript" charset="utf-8" src="js/cordova.js"></script>
 		<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
 		<script type="text/javascript" src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
-		<script type="text/javascript" src="js/main.js"></script>
+		<script type="text/javascript" src="js/main.js"></script> 
+		
 	</head>
-	<body onload="readDatabases()">
+	<body onload="readDatabasesTablet()">
 		<div data-role="page">
 	        <div data-role="header">
 				<a href="category.html" data-role="button" data-icon="back"  data-theme="a" data-inline="true">Back</a>
@@ -18,18 +19,18 @@
 				
 				<div data-role="navbar">
 					<ul>
-						<li><a href="maytinhban.html" data-role="button" data-icon="grid" data-iconpos="notext" data-theme="b">Máy tính bàn</a></li>
-	                    <li><a href="maytinhcanhan.html"  data-role="button" data-icon="grid" data-iconpos="notext" data-theme="b">Máy tính cá nhân</a></li>
-						<li><a href="maytinhbang.html"  data-role="button" data-icon="grid" data-iconpos="notext" data-theme="b">Máy tính bảng</a></li>
+						<li><a href="#" onclick="goDesktop()" data-role="button" data-icon="grid" data-iconpos="notext" data-theme="b">Máy tính bàn</a></li>
+	                    <li><a href="#" onclick="goLaptop()" data-role="button" data-icon="grid" data-iconpos="notext" data-theme="b">Máy tính cá nhân</a></li>
+						<li><a href="#" onclick="goTablet()" data-role="button" data-icon="grid" data-iconpos="notext" data-theme="b">Máy tính bảng</a></li>
 	                   
 	                </ul> 
 	            </div>
 	        </div> <!--end header -->
 			
 	        <div data-role="content">
-					<div class="content-primary" id="category"> 
-						<ul  data-role="listview" data-inset="true"data-filter="true" data-filter-placeholder="Search..." >
-						</ul>
+					<div class="content-primary" id="maytinhbang"> 
+						<!-- <ul  data-role="listview" data-inset="true"data-filter="true" data-filter-placeholder="Search..." >
+						</ul> -->
 					</div>
 				</div><!--end content -->
 					

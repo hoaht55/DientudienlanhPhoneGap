@@ -2,6 +2,7 @@
 .cost {
 	color: red;
 	float: right;
+	font-weight: bold;
 	
 }
 .introtext {
