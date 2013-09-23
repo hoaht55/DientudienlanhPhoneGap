@@ -9,32 +9,30 @@
 		<script type="text/javascript" src="js/main.js"></script> 
 		
 	</head>
-	<body onload="readDatabasesLaptop()">
-		<div data-role="page">
+	<body onload="readDatabasesFridge()">
+		<div data-role="page" id="page1">
 	        <div data-role="header">
 				<a href="#" onclick="goCategory()" data-role="button" data-icon="back"  data-theme="a" data-inline="true">Back</a>
 	            <h1>
-	                Điện tử
+	                Điện lạnh
 	            </h1>
 				
 				<div data-role="navbar">
 					<ul>
-						<li><a href="#" onclick="goDesktop()" data-role="button" data-icon="grid" data-iconpos="notext" data-theme="b">Máy tính bàn</a></li>
-	                    <li><a href="#" onclick="goLaptop()" data-role="button" data-icon="grid" data-iconpos="notext" data-theme="b">Máy tính cá nhân</a></li>
-						<li><a href="#" onclick="goTablet()" data-role="button" data-icon="grid" data-iconpos="notext" data-theme="b">Máy tính bảng</a></li>
+						<li><a href="#" onclick="goFridge()" data-role="button" data-icon="grid" data-iconpos="notext" data-theme="b">Tủ lạnh</a></li>
+	                    <li><a href="#" onclick="goAir()" data-role="button" data-icon="grid" data-iconpos="notext" data-theme="b">Điều hòa</a></li>
+						<li><a href="#" onclick="goWasher()" data-role="button" data-icon="grid" data-iconpos="notext" data-theme="b">Máy giặt</a></li>
 	                   
 	                </ul> 
 	            </div>
 	        </div> <!--end header -->
 			
-	        <div data-role="content">
-					<div class="content-primary" id="maytinhcanhan"> 
-						<!-- <ul  data-role="listview" data-inset="true"data-filter="true" data-filter-placeholder="Search..." >
-						</ul> -->
-					</div>
-				</div><!--end content -->
-					
-		</div><!--end page1-->
+	       <div data-role="content">
+				<div class="content-primary" id="tulanh"> 
+						<!-- <ul  data-role="listview" data-inset="true" data-filter="true" data-filter-placeholder="Search..." >
+						</ul>  -->
+				</div>
+			</div><!-- end content -->		
+		</div><!-- end page1 -->
 	</body>
-	
 </html>
