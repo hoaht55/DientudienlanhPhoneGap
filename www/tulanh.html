@@ -10,12 +10,12 @@
 		
 	</head>
 	<body onload="readDatabasesFridge()">
-		<div data-role="page" id="page1">
-	        <div data-role="header">
-				<a href="#" onclick="goCategory()" data-role="button" data-icon="back"  data-theme="a" data-inline="true">Back</a>
-	            <h1>
-	                Điện lạnh
-	            </h1>
+		<div data-role="page" class="ui-responsive-panel">
+
+			<div data-role="header" data-theme="d">
+				<h1>Dòng sản phẩm</h1>
+				<a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>
+				<!--<a href="#add-form" data-icon="plus" data-iconpos="notext">Add</a>-->
 				
 				<div data-role="navbar">
 					<ul>
@@ -25,14 +25,44 @@
 	                   
 	                </ul> 
 	            </div>
-	        </div> <!--end header -->
-			
-	       <div data-role="content">
+			</div><!-- /header -->
+			<div data-role="content">
 				<div class="content-primary" id="tulanh"> 
 						<!-- <ul  data-role="listview" data-inset="true" data-filter="true" data-filter-placeholder="Search..." >
 						</ul>  -->
 				</div>
-			</div><!-- end content -->		
-		</div><!-- end page1 -->
+			</div><!-- /content -->
+
+			
+			
+			<style>
+				.nav-search .ui-btn-up-a {
+					background-image:none;
+					background-color:#333333;
+				}
+				.nav-search .ui-btn-inner {
+					border-top: 1px solid #888;
+					border-color: rgba(255, 255, 255, .1);
+				}
+            </style>
+
+				<div data-role="panel" data-position="left" data-position-fixed="false" data-display="reveal" id="nav-panel" data-theme="b">
+
+					<ul data-role="listview" data-theme="b" data-divider-theme="d" style="margin-top:-16px;" class="nav-search">
+						<li data-icon="delete" style="background-color:#111;">
+							<a href="#" data-rel="close">Close menu</a>
+						</li>
+						<li data-filtertext="wai-aria voiceover accessibility screen reader">
+							<a onclick="goDesktop()">Điện tử</a>
+						</li>
+						<li data-filtertext="wai-aria voiceover accessibility screen reader">
+							<a onclick="goFridge()">Điện lạnh</a>
+						</li>
+						
+					</ul>
+
+					<!-- panel content goes here -->
+				</div><!-- /panel -->
+		</div><!-- /page --> 
 	</body>
 </html>

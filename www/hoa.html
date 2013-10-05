@@ -1,16 +1,13 @@
+
 <html>
 	<head>
 		<title>Demo</title>
-		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
-		<link rel="stylesheet" href="css/style.css"/> 
-		<script type="text/javascript" charset="utf-8" src="js/cordova.js"></script>
-		<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
-		<script type="text/javascript" src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+		<script type="text/javascript" src="jquery.js"></script>
 		<script type="text/javascript">
 			json="";
 			function getJson()
 			{
-				var urls= "http://203.113.130.218:50080/dtdl/api/all_products.php?callback=?";
+				var urls= "http://203.113.130.218:50080/dtdl/api/get_category.php";
 				console.log("url: " + urls );
 				//alert(urls);
 				$.ajax({// cau lenh ajax POST vs usernam password
@@ -18,7 +15,7 @@
 				url: urls,
 				type: "GET",
 				success: function( data){ // get read data from json to database with nameTable MARKSTUDENT
-				//	console.log(data);
+					console.log(data);
 					//var	myJSONText	=	JSON.stringify(data,replacer);
 					json=data;
 					startCreate();
@@ -38,14 +35,14 @@
 			
 			function createTable(tx) {
 				tx.executeSql('DROP TABLE IF EXISTS DEMO');
-				tx.executeSql('CREATE TABLE IF NOT EXISTS DEMO (id int, image text, catid int, price int, name text)');
+				tx.executeSql('CREATE TABLE IF NOT EXISTS DEMO (id int,parent_id id, title text)');
 				
 				// loop to read data from jsonObject to create table
 				console.log("B1");
 				for (var i in json){
-						tx.executeSql('INSERT INTO DEMO (id, image, catid, price, name) VALUES ("'+json[i].id+'","'+json[i].image+'","'+json[i].catid+'","'+json[i].price+'","'+json[i].name+'")');
-						//console.log("jsonmarkstudent");
-						//console.log(json[i].id + "  " + json[i].image + "  " + json[i].price + "   " + json[i].name);
+						tx.executeSql('INSERT INTO DEMO (id, parent_id,title) VALUES ('+json[i].id+','+json[i].parent_id+',"'+json[i].title+'")');
+						console.log("jsonmarkstudent");
+						console.log(json[i].id + "  " + json[i].parent_id + "   " + json[i].title);
 						
 
 				}// end for 
@@ -60,7 +57,6 @@
 			// read from data base
 			function readDatabases() {
 				var db = window.openDatabase("Database", "1.0", "PhoneGap Demo", 2000000);
-				getJson();
 				db.transaction(queryDB, errorRead);
 			}
 			
@@ -71,40 +67,24 @@
 			
 			function querySuccess( tx,results )
 			{
-				
-				 $('#category').empty();
-			        $.each(results.rows,function(index){
-			            var row = results.rows.item(index);
-			            if (row["catid"] == 14) {
-			            	$('#category').append('<li id="'+row["id"]+'"><a href="#"><img src="http://203.113.130.218:50080/dtdl/'+row["image"]+'" class="ui-li-thumb" /><h2>'+row["name"]+'</h2><p class="cost">Giá:'+row["price"]+'VNĐ</p></a></li>');
-			            }
-			        });
-			 
-			        $('#category').listview();
+				var len = results.rows.length;
+				console.log("MARKSTUDENT table: " + len + " rows found.");
+				for( var i = 0; i < len; i++)
+				{
+					console.log("Row " + (i+1));
+					console.log( results.rows.item(i).id + "   " + results.rows.item(i).parent_id + "   " + results.rows.item(i).title);
+				}
 			}
 			
 			function errorRead( error)
 			{
-				console.log("errorRead : " + error.code );
-			
+				Console.log("errorRead : " + error.code );
 			}
 		</script>
 	</head>
 	
-	<body onload="readDatabases()">
-		<div data-role="page">
-			<div data-role="header" data-position="fixed" data-theme="b">
-			   <h1>Products</h1>
-			 
-			</div>
-			<div data-role="content">
-			   <ul id="category">
-			   </ul>
-			</div>
-			
-			
-		</div>
-			<!-- <button onclick="getJson()">GetJson</button>
-			<button onclick="readDatabases()">Show data</button> -->
+	<body>
+			<button onclick="getJson()">GetJson</button>
+			<button onclick="readDatabases()">Show data</button>
 	</body>
 </html>
