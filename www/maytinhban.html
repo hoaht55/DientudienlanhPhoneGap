@@ -7,19 +7,19 @@
 		<title>jQuery Mobile Demos - Slide Panel</title>
 		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
 		<link rel="stylesheet" href="css/style.css"/> 
-		<!---<script type="text/javascript" charset="utf-8" src="js/cordova.js"></script>-->
+		<script type="text/javascript" charset="utf-8" src="js/cordova.js"></script>
 		<script type="text/javascript" src="js/main.js"></script>
 		<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
 		<script type="text/javascript" src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
 
 	</head>
-	<body onload="readDatabases()">
+	<body onload="readDatabasesDesktop()">
 		<div data-role="page" class="ui-responsive-panel">
 
 			<div data-role="header" data-theme="d">
 				<h1>Dòng sản phẩm</h1>
 				<a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>
-				<!--<a href="#add-form" data-icon="plus" data-iconpos="notext">Add</a>-->
+				<a href="#" onclick="goHome()" data-icon="home" data-iconpos="notext" data-direction="reverse">Home</a>
 				
 				<div data-role="navbar">
 					<ul>
@@ -31,9 +31,9 @@
 	            </div>
 			</div><!-- /header -->
 			<div data-role="content">
-				<div class="content-primary" id="maytinhbang"> 
-						<!-- <ul  data-role="listview" data-inset="true" data-filter="true" data-filter-placeholder="Search..." >
-						</ul>  -->
+				<div class="content-primary" > 
+					<ul id="maytinhban"  data-inset="true" data-filter="true" data-filter-placeholder="Search..." >
+					</ul> 
 				</div>
 			</div><!-- /content -->
 

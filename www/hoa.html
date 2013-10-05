@@ -1,90 +1,197 @@
 
+<!DOCTYPE html>
 <html>
 	<head>
-		<title>Demo</title>
-		<script type="text/javascript" src="jquery.js"></script>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>jQuery Mobile Demos - Slide Panel</title>
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
+		<link rel="stylesheet" href="css/style.css"/> 
 		<script type="text/javascript">
-			json="";
-			function getJson()
-			{
-				var urls= "http://203.113.130.218:50080/dtdl/api/get_category.php";
-				console.log("url: " + urls );
-				//alert(urls);
-				$.ajax({// cau lenh ajax POST vs usernam password
-				dataType: "json",
-				url: urls,
-				type: "GET",
-				success: function( data){ // get read data from json to database with nameTable MARKSTUDENT
-					console.log(data);
-					//var	myJSONText	=	JSON.stringify(data,replacer);
-					json=data;
-					startCreate();
-				},
-				error: function(xhr, textStatus, error){
-					alert("Erorr mark");
-				}
-				});// end ajax
-				
-			}
-			function startCreate() {
-				var db = window.openDatabase("Database", "1.0", "PhoneGap Demo", 2000000);
-				db.transaction(createTable, errorCB);
-				console.log("B0");
-			}
-			
-			
-			function createTable(tx) {
-				tx.executeSql('DROP TABLE IF EXISTS DEMO');
-				tx.executeSql('CREATE TABLE IF NOT EXISTS DEMO (id int,parent_id id, title text)');
-				
-				// loop to read data from jsonObject to create table
-				console.log("B1");
-				for (var i in json){
-						tx.executeSql('INSERT INTO DEMO (id, parent_id,title) VALUES ('+json[i].id+','+json[i].parent_id+',"'+json[i].title+'")');
-						console.log("jsonmarkstudent");
-						console.log(json[i].id + "  " + json[i].parent_id + "   " + json[i].title);
-						
+		//----------------------Read data to Json from SQLite-------------------
 
-				}// end for 
-				console.log("B2");
-			}//
+		json="";
+		//get Json to SQLite.
+		function getJson()
+		{
+			var urls= "http://203.113.130.218:50080/dtdl/api/all_products.php?callback=?";
+			//console.log("url: " + urls );
 			
-			function errorCB(err) {
-				console.log("Error processing SQL 1: "+err.code);
+			$.ajax({
+			dataType: "json",
+			url: urls,
+			type: "GET",
+			success: function( data){ // get read data from json to database with nameTable DEMO
+			//	console.log(data);
+				
+				json=data;
+				startCreate();
+			},
+			error: function(xhr, textStatus, error){
+				alert("Erorr mark");
 			}
+			});// end ajax
 			
-			//-----------------
-			// read from data base
-			function readDatabases() {
-				var db = window.openDatabase("Database", "1.0", "PhoneGap Demo", 2000000);
-				db.transaction(queryDB, errorRead);
-			}
+		}
+
+		//start create 
+		function startCreate() {
+			var db = window.openDatabase("Database", "1.0", "PhoneGap Demo", 2000000);
+			db.transaction(createTable, errorCB);
+			console.log("B0");
+		}
+
+		//create table products
+		function createTable(tx) {
+			tx.executeSql('DROP TABLE IF EXISTS PRODUCTS');
+			tx.executeSql('CREATE TABLE IF NOT EXISTS PRODUCTS (introtext int, image text, catid int, price int, name text)');
 			
-			function queryDB( tx )
-			{
-				tx.executeSql('SELECT * FROM DEMO', [], querySuccess, errorCB);
-			}
+			for (var i in json){
+					tx.executeSql('INSERT INTO PRODUCTS (introtext, image, catid, price, name) VALUES ("'+json[i].introtext+'","'+json[i].image+'","'+json[i].catid+'","'+json[i].price+'","'+json[i].name+'")');
+					//console.log("jsonmarkstudent");
+					console.log(json[i].introtext + "  " + json[i].image + "  " + json[i].price + "   " + json[i].name);
+					
+
+			}// end for 
+			//console.log("B2");
+		}
+
+		//display error processing sql 1
+		function errorCB(err) {
+			console.log("Error processing SQL 1: "+err.code);
+		}
+
+		//read error
+		function errorRead( error)
+		{
+			console.log("errorRead : " + error.code );
+
+		}
+		//--------------------------------
+		// read from data base
+		function readDatabases() {
+			var db = window.openDatabase("Database", "1.0", "PhoneGap Demo", 2000000);
+			getJson();
+			db.transaction(queryDB, errorRead);
+		}
+
+		//query databases table products
+		function queryDB( tx )
+		{
+			tx.executeSql('SELECT * FROM PRODUCTS', [], querySuccess, errorCB);
+		}
+
+		//display list products
+		function querySuccess( tx,results )
+		{
 			
-			function querySuccess( tx,results )
-			{
-				var len = results.rows.length;
-				console.log("MARKSTUDENT table: " + len + " rows found.");
-				for( var i = 0; i < len; i++)
-				{
-					console.log("Row " + (i+1));
-					console.log( results.rows.item(i).id + "   " + results.rows.item(i).parent_id + "   " + results.rows.item(i).title);
-				}
-			}
+			//display list desktop
+			$.mobile.showPageLoadingMsg(true);
+			 $('#maytinhban').empty();
+		        $.each(results.rows,function(index){
+		            var row = results.rows.item(index);
+		            if (row["catid"] == 8) {
+		            	$('#maytinhban').append('<li><a href="#"><img src="http://203.113.130.218:50080/dtdl/'+row["image"]+'" class="ui-li-thumb" /><h2>'+row["name"]+'</h2><h2>'+row["introtext"]+'</h2><p class="cost">Giá: '+row["price"]+' VNĐ</p></a></li>');
+		            }
+		        });
+		 
+		        $('#maytinhban').listview();
+		        $.mobile.hidePageLoadingMsg();
+		}
+
+
+		//--------------------------
+		//display list desktop
+		function querySuccessDesktop( tx,results )
+		{
 			
-			function errorRead( error)
-			{
-				Console.log("errorRead : " + error.code );
-			}
+			//display list desktop
+			$.mobile.showPageLoadingMsg(true);
+			 $('#maytinhban').empty();
+		      $.each(results.rows,function(index){
+		          var row = results.rows.item(index);
+		          if (row["catid"] == 8) {
+		          	$('#maytinhban').append('<li ><a href="#"><img src="http://203.113.130.218:50080/dtdl/'+row["image"]+'" class="ui-li-thumb" /><h2>'+row["name"]+'</h2><h2>'+row["introtext"]+'</h2><p class="cost">Giá: '+row["price"]+' VNĐ</p></a></li>');
+		          }
+		      });
+
+		      $('#maytinhban').listview();
+		      $.mobile.hidePageLoadingMsg();
+		}
+
+
+		//read from data base
+		function readDatabasesDesktop() {
+			var db = window.openDatabase("Database", "1.0", "PhoneGap Demo", 2000000);
+			getJson();
+			db.transaction(queryDBDesktop, errorRead);
+		}
+
+
+		function queryDBDesktop( tx )
+		{
+			tx.executeSql('SELECT * FROM PRODUCTS', [], querySuccessDesktop, errorCB);
+		}
+
 		</script>
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+		<script type="text/javascript" src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+
 	</head>
-	
-	<body>
-			<button onclick="getJson()">GetJson</button>
-			<button onclick="readDatabases()">Show data</button>
+	<body onload="readDatabasesDesktop()">
+		<div data-role="page" class="ui-responsive-panel">
+
+			<div data-role="header" data-theme="d">
+				<h1>Dòng sản phẩm</h1>
+				<a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>
+				<a href="#" onclick="goHome()" data-icon="home" data-iconpos="notext" data-direction="reverse">Home</a>
+				
+				<div data-role="navbar">
+					<ul>
+						<li><a href="#" onclick="goDesktop()" data-role="button" data-icon="grid" data-iconpos="notext" data-theme="b">Máy tính bàn</a></li>
+	                    <li><a href="#" onclick="goLaptop()" data-role="button" data-icon="grid" data-iconpos="notext" data-theme="b">Máy tính cá nhân</a></li>
+						<li><a href="#" onclick="goTablet()" data-role="button" data-icon="grid" data-iconpos="notext" data-theme="b">Máy tính bảng</a></li>
+	                   
+	                </ul> 
+	            </div>
+			</div><!-- /header -->
+			<div data-role="content">
+				<div class="content-primary" id="maytinhban"> 
+						<!-- <ul  data-role="listview" data-inset="true" data-filter="true" data-filter-placeholder="Search..." >
+						</ul>  -->
+				</div>
+			</div><!-- /content -->
+
+			
+			
+			<style>
+				.nav-search .ui-btn-up-a {
+					background-image:none;
+					background-color:#333333;
+				}
+				.nav-search .ui-btn-inner {
+					border-top: 1px solid #888;
+					border-color: rgba(255, 255, 255, .1);
+				}
+            </style>
+
+				<div data-role="panel" data-position="left" data-position-fixed="false" data-display="reveal" id="nav-panel" data-theme="b">
+
+					<ul data-role="listview" data-theme="b" data-divider-theme="d" style="margin-top:-16px;" class="nav-search">
+						<li data-icon="delete" style="background-color:#111;">
+							<a href="#" data-rel="close">Close menu</a>
+						</li>
+						<li data-filtertext="wai-aria voiceover accessibility screen reader">
+							<a onclick="goDesktop()">Điện tử</a>
+						</li>
+						<li data-filtertext="wai-aria voiceover accessibility screen reader">
+							<a onclick="goFridge()">Điện lạnh</a>
+						</li>
+						
+					</ul>
+
+					<!-- panel content goes here -->
+				</div><!-- /panel -->
+		</div><!-- /page --> 
 	</body>
 </html>

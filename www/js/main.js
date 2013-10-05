@@ -1,4 +1,4 @@
-//----------------------Read data to Json from SQLite-------------------
+﻿//----------------------Read data to Json from SQLite-------------------
 
 json="";
 //get Json to SQLite.
@@ -87,8 +87,43 @@ function querySuccess( tx,results )
  
         $('#maytinhban').listview();
         $.mobile.hidePageLoadingMsg();
+	
 }
 
+
+//--------------------------
+//display list desktop
+function querySuccessDesktop( tx,results )
+{
+	
+	//display list desktop
+	$.mobile.showPageLoadingMsg(true);
+	 $('#maytinhban').empty();
+      $.each(results.rows,function(index){
+          var row = results.rows.item(index);
+          if (row["catid"] == 8) {
+          	$('#maytinhban').append('<li id="'+row["id"]+'"><a href="#"><img src="http://203.113.130.218:50080/dtdl/'+row["image"]+'" class="ui-li-thumb" /><h2>'+row["name"]+'</h2><p class="cost">Giá: '+row["price"]+' VNĐ</p></a></li>');
+          }
+      });
+
+      $('#maytinhban').listview();
+      $.mobile.hidePageLoadingMsg();
+	
+}
+
+
+//read from data base
+function readDatabasesDesktop() {
+	var db = window.openDatabase("Database", "1.0", "PhoneGap Demo", 2000000);
+	getJson();
+	db.transaction(queryDBDesktop, errorRead);
+}
+
+
+function queryDBDesktop( tx )
+{
+	tx.executeSql('SELECT * FROM PRODUCTS', [], querySuccessDesktop, errorCB);
+}
 //--------------------------
 //display list laptop
 function querySuccessLaptop( tx,results )
@@ -254,6 +289,11 @@ function queryDBAir( tx )
 	tx.executeSql('SELECT * FROM PRODUCTS', [], querySuccessAir, errorCB);
 }
 //-----------------------------Control page--------------------------------
+//go page Desktop
+function goHome() {
+	window.location.assign("home.html");
+}
+
 //go page Desktop
 function goDesktop() {
 	window.location.assign("maytinhban.html");
