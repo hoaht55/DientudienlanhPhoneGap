@@ -7,7 +7,7 @@
 		<title>jQuery Mobile Demos - Slide Panel</title>
 		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
 		<link rel="stylesheet" href="css/style.css"/> 
-		<!---<script type="text/javascript" charset="utf-8" src="js/cordova.js"></script>-->
+		<script type="text/javascript" charset="utf-8" src="js/cordova.js"></script>
 		<script type="text/javascript" src="js/main.js"></script>
 		<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
 		<script type="text/javascript" src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
@@ -16,7 +16,7 @@
 	<body onload="readDatabasesLaptop()">
 		<div data-role="page" class="ui-responsive-panel">
 
-			<div data-role="header" data-theme="d">
+			<div data-role="header" data-theme="a">
 				<h1>Dòng sản phẩm</h1>
 				<a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>
 				<a href="#" onclick="goHome()" data-icon="home" data-iconpos="notext" data-direction="reverse">Home</a>
@@ -49,13 +49,13 @@
 					border-color: rgba(255, 255, 255, .1);
 				}
             </style>
+				<div data-role="panel" data-position="left" data-position-fixed="false" data-display="reveal" id="nav-panel" data-theme="a">
 
-				<div data-role="panel" data-position="left" data-position-fixed="false" data-display="reveal" id="nav-panel" data-theme="b">
-
-					<ul data-role="listview" data-theme="b" data-divider-theme="d" style="margin-top:-16px;" class="nav-search">
+					<ul data-role="listview" data-theme="d" data-inset="true" data-divider-theme="b" style="margin-top:-16px;" class="nav-search">
 						<li data-icon="delete" style="background-color:#111;">
 							<a href="#" data-rel="close">Close menu</a>
 						</li>
+						<li data-role="list-divider">Sản phẩm</li>
 						<li data-filtertext="wai-aria voiceover accessibility screen reader">
 							<a onclick="goDesktop()">Điện tử</a>
 						</li>
