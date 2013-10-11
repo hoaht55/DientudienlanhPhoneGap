@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Máy tính bàn</title>
+		<title>jQuery Mobile Demos - Slide Panel</title>
 		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
 		<link rel="stylesheet" href="css/style.css"/> 
 		<script type="text/javascript" charset="utf-8" src="js/cordova.js"></script>
@@ -13,7 +13,7 @@
 		<script type="text/javascript" src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
 
 	</head>
-	<body onload="readDatabasesDesktop()">
+	<body onload="readDatabasesDesktop() ">
 		<div data-role="page" class="ui-responsive-panel">
 
 			<div data-role="header" data-theme="a">
@@ -32,29 +32,41 @@
 			</div><!-- /header -->
 			<div data-role="content">
 				<div class="content-primary" > 
-					<ul id="maytinhban"  data-inset="true" data-filter="true" data-filter-placeholder="Search..." data-split-icon="gear" data-split-theme="d" >
-					</ul> 
+						<ul  id="maytinhban" data-inset="true" data-filter="true" data-filter-placeholder="Search..." >
+						</ul> 
 				</div>
 			</div><!-- /content -->
 
-			<div data-role="panel" data-position="left" data-position-fixed="false" data-display="reveal" id="nav-panel" data-theme="a">
+			
+			
+			<style>
+				.nav-search .ui-btn-up-a {
+					background-image:none;
+					background-color:#333333;
+				}
+				.nav-search .ui-btn-inner {
+					border-top: 1px solid #888;
+					border-color: rgba(255, 255, 255, .1);
+				}
+            </style>
+				<div data-role="panel" data-position="left" data-position-fixed="false" data-display="reveal" id="nav-panel" data-theme="a">
 
-				<ul data-role="listview" data-theme="d" data-inset="true" data-divider-theme="b" style="margin-top:-16px;" class="nav-search">
-					<li data-icon="delete" style="background-color:#111;">
-						<a href="#" data-rel="close">Close menu</a>
-					</li>
-					<li data-role="list-divider">Sản phẩm</li>
-					<li data-filtertext="wai-aria voiceover accessibility screen reader">
-						<a onclick="goDesktop()">Điện tử</a>
-					</li>
-					<li data-filtertext="wai-aria voiceover accessibility screen reader">
-						<a onclick="goFridge()">Điện lạnh</a>
-					</li>
-					
-				</ul>
+					<ul data-role="listview" data-theme="d" data-inset="true" data-divider-theme="b" style="margin-top:-16px;" class="nav-search">
+						<li data-icon="delete" style="background-color:#111;">
+							<a href="#" data-rel="close">Close menu</a>
+						</li>
+						<li data-role="list-divider">Sản phẩm</li>
+						<li data-filtertext="wai-aria voiceover accessibility screen reader">
+							<a onclick="goDesktop()">Điện tử</a>
+						</li>
+						<li data-filtertext="wai-aria voiceover accessibility screen reader">
+							<a onclick="goFridge()">Điện lạnh</a>
+						</li>
+						
+					</ul>
 
-				<!-- panel content goes here -->
-			</div><!-- /panel -->
+					<!-- panel content goes here -->
+				</div><!-- /panel -->
 		</div><!-- /page --> 
 	</body>
 </html>

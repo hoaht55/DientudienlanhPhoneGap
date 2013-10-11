@@ -1,0 +1,57 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">	
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+	<title>Đăng nhập</title>
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
+	<link rel="stylesheet" href="css/style.css"/> 
+	<script type="text/javascript" charset="utf-8" src="js/cordova.js"></script>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+	<!-- <script type="text/javascript" src="js/main.js"></script>  -->
+	<script type="text/javascript" src="js/login.js"></script> 
+		
+</head>
+ 
+<body onload="init()">
+ 
+	
+	 
+	<div id="loginPage" data-role="page">
+	 
+	    <div data-role="header">
+	        <h1>Đăng nhập</h1>
+	    </div>
+	 
+	    <div data-role="content">    
+	    
+	    	<div style=" text-align:center" id="banner">
+            	<img id="login" style="width: 400px; height: 200px" src="images/user_256.png"></div>
+       		</div>
+	 
+	        <form id="loginForm">
+		        <div data-role="fieldcontain" class="ui-hide-label">
+		            <label for="username">Tên đăng nhập:</label>
+		            <input type="text" name="username" id="username" value="" placeholder="Tên đăng nhập" />
+		        </div>
+		 
+		        <div data-role="fieldcontain" class="ui-hide-label">
+		            <label for="password">Mật khẩu:</label>
+		            <input type="password" name="password" id="password" value="" placeholder="Mật khẩu" />
+		        </div>
+		 
+		        <input type="submit" value="Login" id="submitButton" >
+	        </form>
+	        
+	    </div>
+	 
+	    <!-- <div data-role="footer">
+	        <h4>&copy; Camden Enterprises</h4>
+	    </div>
+	  -->
+	</div>
+	 
+</body>
+</html>
