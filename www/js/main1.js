@@ -81,7 +81,7 @@ function querySuccess( tx,results )
         $.each(results.rows,function(index){
             var row = results.rows.item(index);
             if (row["catid"] == 8) {
-            	$('#maytinhban').append('<li id="'+row["id"]+'"><a href="#"><img src="http://203.113.130.218:50080/dtdl/'+row["image"]+'" class="ui-li-thumb" /><h2>'+row["name"]+'</h2><p class="cost">Giá: '+row["price"]+' VNĐ</p></a></li>');
+            	$('#maytinhban').append('<li id="'+row["id"]+'" ><a href="#" data-rel="popup" data-position-to="window" data-transition="pop"><img src="http://203.113.130.218:50080/dtdl/'+row["image"]+'" class="ui-li-thumb" /><h2>'+row["name"]+'</h2><p class="cost">Giá: '+row["price"]+' VNĐ</p></a></li>');
             }
         });
  
@@ -98,17 +98,16 @@ function querySuccessDesktop( tx,results )
 	
 	//display list desktop
 	$.mobile.showPageLoadingMsg(true);
-	 $('#maytinhban').empty();
-      $.each(results.rows,function(index){
-          var row = results.rows.item(index);
-          if (row["catid"] == 8) {
-          	$('#maytinhban').append('<li id="'+row["id"]+'"><a href="#"><img src="http://203.113.130.218:50080/dtdl/'+row["image"]+'" class="ui-li-thumb" /><h2>'+row["name"]+'</h2><p class="cost">Giá: '+row["price"]+' VNĐ</p></a></li>');
-          }
-      });
-
-      $('#maytinhban').listview();
-      $.mobile.hidePageLoadingMsg();
-	
+	 $('#maytinhcanhan').empty();
+        $.each(results.rows,function(index){
+            var row = results.rows.item(index);
+            if (row["catid"] == 8) {
+            	$('#maytinhban').append('<li id="'+row["id"]+'"><a href="#"><img src="http://203.113.130.218:50080/dtdl/'+row["image"]+'" class="ui-li-thumb" /><h2>'+row["name"]+'</h2><p class="cost">Giá: '+row["price"]+' VNĐ</p></a></li>');
+            }
+        });
+ 
+        $('#maytinhban').listview();
+        $.mobile.hidePageLoadingMsg();
 }
 
 
@@ -124,6 +123,8 @@ function queryDBDesktop( tx )
 {
 	tx.executeSql('SELECT * FROM PRODUCTS', [], querySuccessDesktop, errorCB);
 }
+
+//
 //--------------------------
 //display list laptop
 function querySuccessLaptop( tx,results )
@@ -223,12 +224,13 @@ function queryDBFridge( tx )
 	tx.executeSql('SELECT * FROM PRODUCTS', [], querySuccessFridge, errorCB);
 }
 
+//
 //--------------------------------------
 //display list washer
 function querySuccessWasher( tx,results )
 {
 	
-	//display list washer
+	//display list fridge
 	$.mobile.showPageLoadingMsg(true);
 	 $('#maygiat').empty();
         $.each(results.rows,function(index){
@@ -255,7 +257,6 @@ function queryDBWasher( tx )
 {
 	tx.executeSql('SELECT * FROM PRODUCTS', [], querySuccessWasher, errorCB);
 }
-
 //---------------------------------------
 //display list air-condition
 function querySuccessAir( tx,results )
@@ -336,4 +337,40 @@ function goBack() {
 	window.history.back()
 }
 
-//--------------------------
+//-------------------------------------------------------------
+
+//-------------Check state connection----------------------------
+
+//Wait for PhoneGap to load
+//
+
+document.addEventListener("deviceready", onDeviceReady, false);
+//PhoneGap is loaded and it is now safe to make calls PhoneGap methods
+//
+function onDeviceReady() {
+  checkConnection();
+}
+//function checkConnection
+function checkConnection() {
+	var networkState = navigator.network.connection.type;
+	if(networkState == Connection.NONE) {
+		check_network = 0;
+		console.log("Check type connect: " + networkState);
+	} else {
+		check_network = 1;
+		console.log("Check type connect: " + networkState);
+	}
+	var states = {};
+	states[Connection.UNKNOWN]  = 'Unknown connection';
+	states[Connection.ETHERNET] = 'Ethernet connection';
+	states[Connection.WIFI]     = 'WiFi connection';
+	states[Connection.CELL_2G]  = 'Cell 2G connection';
+	states[Connection.CELL_3G]  = 'Cell 3G connection';
+	states[Connection.CELL_4G]  = 'Cell 4G connection';
+	states[Connection.NONE]     = 'No network connection';
+
+	console.log('Connection type: ' + states[networkState]);
+	//alert('Connection type: ' + states[networkState]);
+	
+}
+

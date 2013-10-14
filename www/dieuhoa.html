@@ -4,7 +4,7 @@
 		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
 		<link rel="stylesheet" href="css/style.css"/> 
 		<script type="text/javascript" charset="utf-8" src="js/cordova.js"></script>
-		<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
 		<script type="text/javascript" src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
 		<script type="text/javascript" src="js/main.js"></script> 
 		
@@ -46,24 +46,37 @@
 				}
             </style>
 
-				<div data-role="panel" data-position="left" data-position-fixed="false" data-display="reveal" id="nav-panel" data-theme="a">
+			<div data-role="panel" data-position="left" data-position-fixed="false" data-display="reveal" id="nav-panel" data-theme="a">
 
-					<ul data-role="listview" data-theme="d" data-inset="true" data-divider-theme="b" style="margin-top:-16px;" class="nav-search">
-						<li data-icon="delete" style="background-color:#111;">
-							<a href="#" data-rel="close">Close menu</a>
-						</li>
-						<li data-role="list-divider">Sản phẩm</li>
-						<li data-filtertext="wai-aria voiceover accessibility screen reader">
-							<a onclick="goDesktop()">Điện tử</a>
-						</li>
-						<li data-filtertext="wai-aria voiceover accessibility screen reader">
-							<a onclick="goFridge()">Điện lạnh</a>
-						</li>
-						
-					</ul>
+				<ul data-role="listview" data-theme="d" data-inset="true" data-divider-theme="b" style="margin-top:-16px;" class="nav-search">
+					<li data-icon="delete" style="background-color:#111;">
+						<a href="#" data-rel="close">Close menu</a>
+					</li>
+					
+					<li data-role="list-divider">Sản phẩm</li>
+					<li data-filtertext="wai-aria voiceover accessibility screen reader">
+						<a onclick="goDesktop()">
+							<img src="images/107-widescreen.png" alt="cart" class="ui-li-icon">
+							Điện tử
+						</a>
+					</li>
+					<li data-filtertext="wai-aria voiceover accessibility screen reader">
+						<a onclick="goFridge()">
+							<img src="images/fridge.png" alt="cart" class="ui-li-icon">
+							Điện lạnh
+						</a>
+					</li>
+					<li data-filtertext="wai-aria voiceover accessibility screen reader">
+						<a onclick="goFridge()" >
+							<img src="images/80-shopping-cart.png" alt="cart" class="ui-li-icon">
+							Giỏ hàng của bạn
+						</a>
+					</li>
+					
+				</ul><!-- /listview-->
 
-					<!-- panel content goes here -->
-				</div><!-- /panel -->
+				<!-- panel content goes here -->
+			</div><!-- /panel -->
 		</div><!-- /page --> 
 	</body>
 </html>

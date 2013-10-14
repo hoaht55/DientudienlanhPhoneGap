@@ -5,6 +5,12 @@
 	font-weight: bold;
 	
 }
+.price {
+	color: red;
+	float: right;
+	font-weight: bold;
+	
+}
 .introtext {
 	float: left;
 	font-style: italic;

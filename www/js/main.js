@@ -81,7 +81,8 @@ function querySuccess( tx,results )
         $.each(results.rows,function(index){
             var row = results.rows.item(index);
             if (row["catid"] == 8) {
-            	$('#maytinhban').append('<li id="'+row["id"]+'" ><a href="#" data-rel="popup" data-position-to="window" data-transition="pop"><img src="http://203.113.130.218:50080/dtdl/'+row["image"]+'" class="ui-li-thumb" /><h2>'+row["name"]+'</h2><p class="cost">Giá: '+row["price"]+' VNĐ</p></a></li>');
+            	$('#maytinhban').append('<li id="'+row["id"]+'" ><a href="#" data-rel="popup" data-position-to="window" data-transition="pop"><img src="http://203.113.130.218:50080/dtdl/'+row["image"]+'" class="ui-li-thumb" /><h2>'+row["name"]+'</h2><p class="cost">Giá: '+row["price"]+' VNĐ</p></a></li>'+ 
+				'<a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop">Purchase album</a>');
             }
         });
  
@@ -96,18 +97,30 @@ function querySuccess( tx,results )
 function querySuccessDesktop( tx,results )
 {
 	
-	//display list desktop
+/*	//display list desktop
 	$.mobile.showPageLoadingMsg(true);
 	 $('#maytinhcanhan').empty();
         $.each(results.rows,function(index){
             var row = results.rows.item(index);
             if (row["catid"] == 8) {
-            	$('#maytinhban').append('<li id="'+row["id"]+'"><a href="#"><img src="http://203.113.130.218:50080/dtdl/'+row["image"]+'" class="ui-li-thumb" /><h2>'+row["name"]+'</h2><p class="cost">Giá: '+row["price"]+' VNĐ</p></a></li>');
+            	$('#maytinhban').append('<div><li id="'+row["id"]+'"><a href="#"><img src="http://203.113.130.218:50080/dtdl/'+row["image"]+'" class="ui-li-thumb" /><span class="name">'+row["name"]+'</span>Giá: <span class="price">'+row["price"]+'</span>VNĐ</a></li></div>');
             }
         });
  
         $('#maytinhban').listview();
-        $.mobile.hidePageLoadingMsg();
+        $.mobile.hidePageLoadingMsg(); -->*/
+		//display list desktop
+	$.mobile.showPageLoadingMsg(true);
+		$('#maytinhban').empty();
+			$.each(results.rows,function(index){
+				var row = results.rows.item(index);
+				if (row["catid"] == 8) {
+					$('#maytinhban').append('<li id="'+row["id"]+'" ><a href="#" data-rel="popup" data-position-to="window" data-transition="pop"><img src="http://203.113.130.218:50080/dtdl/'+row["image"]+'" class="ui-li-thumb" /><h2>'+row["name"]+'</h2><p class="cost">Giá: '+row["price"]+' VNĐ</p></a></li>');
+				}
+			});
+	 
+			$('#maytinhban').listview();
+			$.mobile.hidePageLoadingMsg();
 }
 
 
