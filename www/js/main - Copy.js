@@ -57,29 +57,89 @@ function errorRead( error)
 	console.log("errorRead : " + error.code );
 
 }
+//--------------------------------
+// read from data base
+function readDatabases() {
+	var db = window.openDatabase("Database", "1.0", "PhoneGap Demo", 2000000);
+	getJson();
+	db.transaction(queryDB, errorRead);
+}
+
+//query databases table products
+function queryDB( tx )
+{
+	tx.executeSql('SELECT * FROM PRODUCTS', [], querySuccess, errorCB);
+}
+
+//display list products
+function querySuccess( tx,results )
+{
+	
+	//display list desktop
+	/*$.mobile.showPageLoadingMsg(true);
+	 $('#maytinhban').empty();
+        $.each(results.rows,function(index){
+            var row = results.rows.item(index);
+            if (row["catid"] == 8) {
+            	$('#maytinhban').append('<li id="'+row["id"]+'" ><a href="#"><img src="http://203.113.130.218:50080/dtdl/'+row["image"]+'" class="ui-li-thumb" /><div><span class="name">'+row["name"]+'</span><span class="price">Giá: '+row["price"]+' VNĐ</span></a></div></li>'+ 
+				'<a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop">Purchase album</a>');
+            }
+        });
+ 
+        $('#maytinhban').listview();
+        $.mobile.hidePageLoadingMsg();*/
+	//	$.mobile.showPageLoadingMsg(true);
+		var len = results.rows.length;
+		$("#maytinhban").html('');
+		for (var i=0; i<len; i++){
+			var row= results.rows.item(i);
+			var htmlData = '<li id="'+row["id"]+'"><a href="#"><h2>'+row["namee"]+'</h2><p class="ui-li-aside">'+row["price"]+'</p></a></li>';
+			$("#maytinban").append(htmlData).listview('refresh');
+		}
+		$.mobile.changePage($("#index"), { transition : "slide"});
+	//	$.mobile.hidePageLoadingMsg();
+	
+}
+
 
 //--------------------------
 //display list desktop
 function querySuccessDesktop( tx,results )
 {
 	
-	$.mobile.showPageLoadingMsg(true);
+	//display list desktop
+	/*$.mobile.showPageLoadingMsg(true);
+	$('#maytinhban').empty();
 	$.each(results.rows,function(index){
 		var row = results.rows.item(index);
 		if (row["catid"] == 8) {
-			$('#maytinhban').children('ul').append(
+			$('#maytinhban').append('<li id="'+row["id"]+'" ><a href="#" ><img src="http://203.113.130.218:50080/dtdl/'+row["image"]+'" class="ui-li-thumb" /><div><span class="name">'+row["name"]+'</span><span class="price"> '+row["price"]+' </span></div></a></li>');
+		}
+	});
+
+	$('#maytinhban').listview();
+	$.mobile.hidePageLoadingMsg();*/
+	$.mobile.showPageLoadingMsg(true);
+	//$('#maytinhban').empty();
+	$.each(results.rows,function(index){
+		var row = results.rows.item(index);
+		if (row["catid"] == 8) {
+			$('#profs').children('ul').append(
                '<li><a href="#'+row["id"]+'" data-rel="popup" data-position-to="window" data-transition="pop"><img src="http://203.113.130.218:50080/dtdl/'+row["image"]+'" class="ui-li-thumb" />'+
                '<span class="name">'+row["name"]+ '</span>'+
-			     // +'<span class="price">'+'Giá:' + row["price"] + 'VNĐ' + '</span>'+
-			    '<span class="price">'+ row["price"] + '</span>'+
-                /*'<p class="introtext">'+rowintrotext+'</p>'+*/
-			    '</a>'+
-			    '<div data-role="popup" id="'+row["id"]+'" class="ui-content mypopup" data-theme="b">'+
-				'<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>'+ '<div class="full_text">'+ row["id"] +'</div>'+'</div></li>').listview('refresh');
-        }
-    });
-    $('div.mypopup').popup();
-	$.mobile.hidePageLoadingMsg();	
+			 //  +'<span class="price">'+'Giá:' + row["price"] + 'VNĐ' + '</span>'+
+			    +'<span class="price">'+ row["price"] + '</span>'+
+               /*'<p class="introtext">'+rowintrotext+'</p>'+*/
+			   '</a>'+
+			   '<div data-role="popup" id="'+row["id"]+'" class="ui-content mypopup" data-theme="b">'+
+			//    '<a href="#" data-rel="back" data-role="button" data-theme="c" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>'+'<div class="image"><img src="http://203.113.130.218:50080/dtdl/'+field.image+'" width="200px" height="300px"/></div>'+ '<div class="full_text">'+ field.fulltext +'</div>'+'</div></li>').listview('refresh');
+				    '<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>'+ '<div class="full_text">'+ row["id"] +'</div>'+'</div></li>').listview('refresh');
+         }
+         });
+         $('div.mypopup').popup();
+	$.mobile.hidePageLoadingMsg();
+	
+		
 }
 
 
@@ -104,22 +164,16 @@ function querySuccessLaptop( tx,results )
 	
 	//display list desktop
 	$.mobile.showPageLoadingMsg(true);
-	$.each(results.rows,function(index){
-		var row = results.rows.item(index);
-		if (row["catid"] == 10) {
-			$('#maytinhcanhan').children('ul').append(
-               '<li><a href="#'+row["id"]+'" data-rel="popup" data-position-to="window" data-transition="pop"><img src="http://203.113.130.218:50080/dtdl/'+row["image"]+'" class="ui-li-thumb" />'+
-               '<span class="name">'+row["name"]+ '</span>'+
-			     // +'<span class="price">'+'Giá:' + row["price"] + 'VNĐ' + '</span>'+
-			    '<span class="price">'+ row["price"] + '</span>'+
-                /*'<p class="introtext">'+rowintrotext+'</p>'+*/
-			    '</a>'+
-			    '<div data-role="popup" id="'+row["id"]+'" class="ui-content mypopup" data-theme="b">'+
-				'<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>'+ '<div class="full_text">'+ row["id"] +'</div>'+'</div></li>').listview('refresh');
-        }
-    });
-    $('div.mypopup').popup();
-	$.mobile.hidePageLoadingMsg();	
+	 $('#maytinhcanhan').empty();
+        $.each(results.rows,function(index){
+            var row = results.rows.item(index);
+            if (row["catid"] == 10) {
+            	$('#maytinhcanhan').append('<li id="'+row["id"]+'"><a href="#"><img src="http://203.113.130.218:50080/dtdl/'+row["image"]+'" class="ui-li-thumb" /><h2>'+row["name"]+'</h2><p class="cost">Giá: '+row["price"]+' VNĐ</p></a></li>');
+            }
+        });
+ 
+        $('#maytinhcanhan').listview();
+        $.mobile.hidePageLoadingMsg();
 }
 
 
@@ -141,24 +195,18 @@ function queryDBLaptop( tx )
 function querySuccessTablet( tx,results )
 {
 	
-	//display list tablet
-	$.mobile.showPageLoadingMsg(true);
-	$.each(results.rows,function(index){
-		var row = results.rows.item(index);
-		if (row["catid"] == 11) {
-			$('#maytinhbang').children('ul').append(
-               '<li><a href="#'+row["id"]+'" data-rel="popup" data-position-to="window" data-transition="pop"><img src="http://203.113.130.218:50080/dtdl/'+row["image"]+'" class="ui-li-thumb" />'+
-               '<span class="name">'+row["name"]+ '</span>'+
-			     // +'<span class="price">'+'Giá:' + row["price"] + 'VNĐ' + '</span>'+
-			    '<span class="price">'+ row["price"] + '</span>'+
-                /*'<p class="introtext">'+rowintrotext+'</p>'+*/
-			    '</a>'+
-			    '<div data-role="popup" id="'+row["id"]+'" class="ui-content mypopup" data-theme="b">'+
-				'<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>'+ '<div class="full_text">'+ row["id"] +'</div>'+'</div></li>').listview('refresh');
-        }
-    });
-    $('div.mypopup').popup();
-	$.mobile.hidePageLoadingMsg();	
+	//display list desktop
+	//$.mobile.showPageLoadingMsg(true);
+	 $('#maytinhbang').empty();
+        $.each(results.rows,function(index){
+            var row = results.rows.item(index);
+            if (row["catid"] == 11) {
+            	$('#maytinhbang').append('<li id="'+row["id"]+'"><a href="#"><img src="http://203.113.130.218:50080/dtdl/'+row["image"]+'" class="ui-li-thumb" /><h2>'+row["name"]+'</h2><p class="cost">Giá: '+row["price"]+' VNĐ</p></a></li>');
+            }
+        });
+ 
+        $('#maytinhbang').listview();
+      //  $.mobile.hidePageLoadingMsg();
 }
 
 
@@ -182,22 +230,16 @@ function querySuccessFridge( tx,results )
 	
 	//display list fridge
 	$.mobile.showPageLoadingMsg(true);
-	$.each(results.rows,function(index){
-		var row = results.rows.item(index);
-		if (row["catid"] == 9) {
-			$('#tulanh').children('ul').append(
-               '<li><a href="#'+row["id"]+'" data-rel="popup" data-position-to="window" data-transition="pop"><img src="http://203.113.130.218:50080/dtdl/'+row["image"]+'" class="ui-li-thumb" />'+
-               '<span class="name">'+row["name"]+ '</span>'+
-			     // +'<span class="price">'+'Giá:' + row["price"] + 'VNĐ' + '</span>'+
-			    '<span class="price">'+ row["price"] + '</span>'+
-                /*'<p class="introtext">'+rowintrotext+'</p>'+*/
-			    '</a>'+
-			    '<div data-role="popup" id="'+row["id"]+'" class="ui-content mypopup" data-theme="b">'+
-				'<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>'+ '<div class="full_text">'+ row["id"] +'</div>'+'</div></li>').listview('refresh');
-        }
-    });
-    $('div.mypopup').popup();
-	$.mobile.hidePageLoadingMsg();	
+	 $('#tulanh').empty();
+        $.each(results.rows,function(index){
+            var row = results.rows.item(index);
+            if (row["catid"] == 9) {
+            	$('#tulanh').append('<li id="'+row["id"]+'"><a href="#"><img src="http://203.113.130.218:50080/dtdl/'+row["image"]+'" class="ui-li-thumb" /><h2>'+row["name"]+'</h2><p class="cost">Giá: '+row["price"]+' VNĐ</p></a></li>');
+            }
+        });
+ 
+        $('#tulanh').listview();
+        $.mobile.hidePageLoadingMsg();
 }
 
 
@@ -222,22 +264,16 @@ function querySuccessWasher( tx,results )
 	
 	//display list fridge
 	$.mobile.showPageLoadingMsg(true);
-	$.each(results.rows,function(index){
-		var row = results.rows.item(index);
-		if (row["catid"] == 14) {
-			$('#maygiat').children('ul').append(
-               '<li><a href="#'+row["id"]+'" data-rel="popup" data-position-to="window" data-transition="pop"><img src="http://203.113.130.218:50080/dtdl/'+row["image"]+'" class="ui-li-thumb" />'+
-               '<span class="name">'+row["name"]+ '</span>'+
-			     // +'<span class="price">'+'Giá:' + row["price"] + 'VNĐ' + '</span>'+
-			    '<span class="price">'+ row["price"] + '</span>'+
-                /*'<p class="introtext">'+rowintrotext+'</p>'+*/
-			    '</a>'+
-			    '<div data-role="popup" id="'+row["id"]+'" class="ui-content mypopup" data-theme="b">'+
-				'<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>'+ '<div class="full_text">'+ row["id"] +'</div>'+'</div></li>').listview('refresh');
-        }
-    });
-    $('div.mypopup').popup();
-	$.mobile.hidePageLoadingMsg();	
+	 $('#maygiat').empty();
+        $.each(results.rows,function(index){
+            var row = results.rows.item(index);
+            if (row["catid"] == 14) {
+            	$('#maygiat').append('<li id="'+row["id"]+'"><a href="#"><img src="http://203.113.130.218:50080/dtdl/'+row["image"]+'" class="ui-li-thumb" /><h2>'+row["name"]+'</h2><p class="cost">Giá: '+row["price"]+' VNĐ</p></a></li>');
+            }
+        });
+ 
+        $('#maygiat').listview();
+        $.mobile.hidePageLoadingMsg();
 }
 
 
@@ -260,22 +296,16 @@ function querySuccessAir( tx,results )
 	
 	//display list fridge
 	$.mobile.showPageLoadingMsg(true);
-	$.each(results.rows,function(index){
-		var row = results.rows.item(index);
-		if (row["catid"] == 13) {
-			$('#dieuhoa').children('ul').append(
-               '<li><a href="#'+row["id"]+'" data-rel="popup" data-position-to="window" data-transition="pop"><img src="http://203.113.130.218:50080/dtdl/'+row["image"]+'" class="ui-li-thumb" />'+
-               '<span class="name">'+row["name"]+ '</span>'+
-			     // +'<span class="price">'+'Giá:' + row["price"] + 'VNĐ' + '</span>'+
-			    '<span class="price">'+ row["price"] + '</span>'+
-                /*'<p class="introtext">'+rowintrotext+'</p>'+*/
-			    '</a>'+
-			    '<div data-role="popup" id="'+row["id"]+'" class="ui-content mypopup" data-theme="b">'+
-				'<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>'+ '<div class="full_text">'+ row["id"] +'</div>'+'</div></li>').listview('refresh');
-        }
-    });
-    $('div.mypopup').popup();
-	$.mobile.hidePageLoadingMsg();	
+	 $('#dieuhoa').empty();
+        $.each(results.rows,function(index){
+            var row = results.rows.item(index);
+            if (row["catid"] == 13) {
+            	$('#dieuhoa').append('<li id="'+row["id"]+'"><a href="#"><img src="http://203.113.130.218:50080/dtdl/'+row["image"]+'" class="ui-li-thumb" /><h2>'+row["name"]+'</h2><p class="cost">Giá: '+row["price"]+' VNĐ</p></a></li>');
+            }
+        });
+ 
+        $('#dieuhoa').listview();
+        $.mobile.hidePageLoadingMsg();
 }
 
 

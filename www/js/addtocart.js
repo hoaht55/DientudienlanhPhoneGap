@@ -1,8 +1,8 @@
-﻿$(document).ready(function() {
+﻿ $(document).ready(function() {
 	
 	var Arrays=new Array();
 	
-	$('#wrap li').mousemove(function(){
+	$('#maytinban li').mousemove(function(){
 		
 		var position = $(this).position();
 		
@@ -53,7 +53,7 @@
 			$('.cart-total span').html(prev_charges);
 			$('#total-hidden-charges').val(prev_charges);
 			
-			$('#left_bar .cart-info').append('<div class="shopp" id="each-'+thisID+'"><div class="label">'+itemname+'</div><div class="shopp-price"> $<em>'+itemprice+'</em></div><span class="shopp-quantity">1</span><img src="remove.png" class="remove" /><br class="all" /></div>');
+			$('#left_bar .cart-info').append('<div class="shopp" id="each-'+thisID+'"><div class="label">'+itemname+'</div><div class="shopp-price"> $<em>'+itemprice+'</em></div><span class="shopp-quantity">1</span><img src="images/remove.png" class="remove" /><br class="all" /></div>');
 			
 			$('#cart').css({'-webkit-transform' : 'rotate(20deg)','-moz-transform' : 'rotate(20deg)' });
 		}
@@ -93,12 +93,12 @@
 
 function include(arr, obj) {
   for(var i=0; i<arr.length; i++) {
-	if (arr[i] == obj) return true;
+    if (arr[i] == obj) return true;
   }
 }
 function getpos(arr, obj) {
   for(var i=0; i<arr.length; i++) {
-	if (arr[i] == obj) return i;
+    if (arr[i] == obj) return i;
   }
 }
 function angle(){$('#cart').css({'-webkit-transform' : 'rotate(0deg)','-moz-transform' : 'rotate(0deg)' });}

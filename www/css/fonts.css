@@ -1,0 +1,18 @@
+/* font home */
+@font-face
+{
+	font-family: myFont;
+	src: url('fonts/Actionsh.ttf');
+    /*   url('fonts/Royalacid.ttf');  */
+    
+}
+
+p.logo {
+	
+	font-size: 80px;
+	text-align:center;
+	font-family: myFont;
+	font-style: italic;
+	color: rgba(255, 69, 0, 0.75);
+}
+

@@ -1,4 +1,11 @@
 /*  style for details_dienlanh.html and detail_dientu.html*/
+.price1 {
+	color: red;
+	float: right;
+	font-weight: bold;
+	
+}
+
 .cost {
 	color: red;
 	float: right;
@@ -26,4 +33,34 @@
      background-color: #FFBABA;
 }
 
-/*style for home page */
+/*/*-------------------------style for home page --------------------*/
+
+
+.ui-page {
+    background: url(http://mobile.edu.vn/wp-content/uploads/2013/03/mauxanh.jpg) no-repeat fixed left bottom;
+    -webkit-background-size: 100% 100%;
+    -moz-background-size: 100% 100%;
+    -o-background-size: 100% 100%;
+    background-size: cover;
+}
+
+
+
+/* .logo_dt {
+	font-size: 30px;
+	color: rgba(0, 136, 204, 0.75);
+	text-align:center;
+}
+
+.logo_dl{
+	font-size: 30px;
+	color: rgba(255, 69, 0, 0.75);
+	text-align:center;
+} */
+
+@font-face
+{
+font-family: myFont;
+src: url('Sansation_Light.ttf'),
+     url('Sansation_Light.eot'); /* IE9+ */
+}
