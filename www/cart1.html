@@ -103,39 +103,40 @@
 	 <div data-role="page" class="ui-responsive-panel">
 
         <div data-role="header" data-theme="a">
-                <h1>Dòng sản phẩm</h1>
-                <a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>
-                <a href="#" onclick="goHome()" data-icon="home" data-iconpos="notext" data-direction="reverse">Home</a>
-                
-                <div data-role="navbar">
-                   <ul>
-                      	<li><a href="#" onclick="goDesktop()" data-role="button"  data-icon="grid" data-iconpos="notext" data-theme="b">Máy tính bàn</a></li>
-            			<li><a href="#" onclick="goLaptop()" data-role="button" data-icon="grid" data-iconpos="notext" data-theme="b">Máy tính cá nhân</a></li>
-                        <li><a href="#" onclick="goTablet()" data-role="button" data-icon="grid" data-iconpos="notext" data-theme="b">Máy tính bảng</a></li>
-           
-        			</ul> 
-        		</div>
+            <h1>Giỏ hàng của bạn</h1>
+            <a href="#nav-panel" data-icon="back" data-iconpos="notext" data-iconpos="notext">Back</a>
+
         </div><!-- /header -->
                         
 
 		
 		<div data-role="content" id="content">
-			<ul id="catalog" data-role="listview" data-split-theme="d" data-split-icon="gear" data-inset="true" data-filter="true" data-filter-placeholder="Search..." >
-                                          
-				
-				<li>
-					<img src="images/products/whiteStripe.jpg" alt="White Stripe" />
-					<span class="price">$75</span><b>White Stripe<br/><a href="#" onclick="simpleCart.add('name=White Stripe','price=75','image=images/thumbs/whiteStripe.jpg');return false;"> add to cart</a>
-					<a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop">Purchase album</a>
-				</li>
-				
-				<li>
-					<img src="images/products/creamSlipon.jpg" alt="Cream Slip-on" />
-					<span class="price">$45</span><b>Cream Slip-on<br/><a href="#" onclick="simpleCart.add('name=Cream Slip-on','price=45','image=images/thumbs/creamSlipon.jpg');return false;"> add to cart</a>
-					<a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop">Purchase album</a>
-				</li>
-
-			</ul>
+			<div class="content-primary">
+				<ul id="catalog" data-role="listview" data-split-theme="d" data-split-icon="gear" data-inset="true" >
+	                                          
+					
+					<li>
+						<a href="#" onclick="simpleCart.add('name=White Stripe','price=75','image=images/thumbs/whiteStripe.jpg');return false;">
+						<img src="images/products/whiteStripe.jpg" alt="White Stripe" />
+						<span class="price">$75</span>White Stripe</a>
+						<a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop">Purchase album</a>
+					</li>
+					
+					<li>
+						<a href="#" onclick="simpleCart.add('name=Cream Slip-on','price=45','image=images/thumbs/creamSlipon.jpg');return false;">
+						<img src="images/products/creamSlipon.jpg" alt="Cream Slip-on" />
+						<span class="price">$45</span>Cream Slip-on</a>
+						<a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop">Purchase album</a>
+					</li>
+	
+				</ul>
+				<div data-role="popup" id="purchase" data-theme="d" data-overlay-theme="b" class="ui-content" style="max-width:340px;">
+					<h3>Bạn có muốn thêm vào giỏ hàng?</h3>
+				<!--	<p>Your download will begin immediately on your mobile device when you purchase.</p>-->
+					<a href="index.html" data-role="button" data-rel="back" data-theme="b" data-icon="check" data-inline="true" data-mini="true">Addtocart</a>
+					<a href="index.html" data-role="button" data-rel="back" data-inline="true" data-mini="true">Cancel</a>	
+				</div>
+			</div><!-- /end content-primary -->
 			<!--/ Catalog-->
 			
 			

@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Tủ lạnh</title>
+		<title>Sản phẩm mới</title>
 		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
 		<link rel="stylesheet" href="css/style.css"/> 
 		<link rel="stylesheet" href="css.css"/> 
@@ -16,18 +16,18 @@
 		<script type="text/javascript" src="js/addtocart.js"></script>
 		<script type="text/javascript"  src="js/jquery.livequery.js"></script>
 		<style>
-			#fridge .ui-icon { background:  url(images/grid.png) 50% 50% no-repeat; background-size: 22px 20px; }
-			#air .ui-icon { background:  url(images/grid.png) 50% 50% no-repeat; background-size: 25px 17px; }
-			#washer .ui-icon { background:  url(images/grid.png) 50% 50% no-repeat; background-size: 20px 20px; }
+			#desktop .ui-icon { background:  url(images/grid.png) 50% 50% no-repeat; background-size: 22px 20px; }
+			#laptop .ui-icon { background:  url(images/grid.png) 50% 50% no-repeat; background-size: 25px 17px; }
+			#tablet .ui-icon { background:  url(images/grid.png) 50% 50% no-repeat; background-size: 20px 20px; }
 		</style>
 
 	</head>
 	
-	<body onload="readDatabasesAir() ">
+	<body onload="readDatabasesProductsNew() ">
 		<div data-role="page" class="ui-responsive-panel" >
 
 			<div data-role="header" data-theme="b">
-				<p class="header">HomeShop</p>
+				<p class="header">homeShop</p>
 				<a href="#nav-panel"  >
 					<img src="images/align_just.png" alt="cart" class="ui-li-icon">
 				</a>
@@ -43,7 +43,7 @@
 			</div><!-- /header -->
 			
 			<div data-role="content">
-				<div class="content-primary" id="dieuhoa" > 
+				<div class="content-primary" id="mayanh" > 
 						<ul  data-role="listview" data-split-icon="gear" data-split-theme="d" data-inset="true" data-filter="true" data-filter-placeholder="Search..." >
 											
 						</ul> <!--/end listview-->
@@ -58,9 +58,9 @@
 			</div>
 			<div data-role="panel" data-position="left" data-position-fixed="false" data-display="overlay" id="nav-panel" data-theme="b">
 
-				<ul data-role="listview" data-theme="d"  data-divider-theme="b" style="margin-top:-16px;" class="nav-search">
+				<ul data-role="listview" data-theme="d"  data-divider-theme="d" data-insert="flase"  class="nav-search">
 				
-					<!--<li data-role="list-divider">Sản phẩm</li>-->
+					<!--<li data-role="list-divider" role="heading" class="ui-li ui-li-divider ui-bar-d ui-first-child">Đóng</li>-->
 					<li data-filtertext="wai-aria voiceover accessibility screen reader" >
 						<a onclick="goHome()">
 							<img src="images/home_w.png" alt="cart" class="ui-li-icon">
@@ -139,14 +139,15 @@
 				<div data-role="navbar" class="tabbar">
 					<ul>
 						<li>
-							<a href="#" id="fridge" onclick="goFridge()" data-icon="custom" data-theme="b">Tủ Lạnh</a>
+							<a href="#" id="desktop" onclick="goDesktop()" data-icon="custom" data-theme="b">Máy ảnh</a>
 						</li>
 	                    <li>
-							<a href="#" id="air" onclick="goAir()"  data-icon="custom" data-theme="b"  class="ui-btn-active">Điều Hòa</a>
+							<a href="#" id="laptop"onclick="goLaptop()"  data-icon="custom" data-theme="b"  class="ui-btn-active">Máy tính cá nhân</a>
 						</li>
 						<li>
-							<a href="#" id="washer" onclick="goWasher()" data-icon="custom" data-theme="b">Máy Giặt</a>
+							<a href="#" id="tablet" onclick="goTablet()" data-icon="custom" data-theme="b">Máy tính bảng</a>
 						</li>
+	                   
 	                </ul> 
 	            </div>
 			</div>		

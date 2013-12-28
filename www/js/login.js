@@ -1,50 +1,25 @@
-function init() {
-	document.addEventListener("deviceready", deviceReady, true);
-	delete init;
-}
- 
-function checkPreAuth() {
-	console.log("checkPreAuth");
-    var form = $("#loginForm");
-    if(window.localStorage["username"] != undefined && window.localStorage["password"] != undefined) {
-        $("#username", form).val(window.localStorage["username"]);
-        $("#password", form).val(window.localStorage["password"]);
-        handleLogin();
-    }
-}
- 
-function handleLogin() {
-    var form = $("#loginForm");    
-    //disable the button so we can't resubmit while we wait
-    $("#submitButton",form).attr("disabled","disabled");
-    var u = $("#username", form).val();
-    var p = $("#password", form).val();
-    if(u != '' && p!= '') {
-        $.post("http://www.coldfusionjedi.com/demos/2011/nov/10/service.cfc?method=login&returnformat=json", {username:u,password:p}, function(res) {
-            if(res == true) {
-                //store
-                window.localStorage["username"] = u;
-                window.localStorage["password"] = p;             
-                $.mobile.changePage("maytinhban.html");
-            } else {
-                navigator.notification.alert("Your login failed", function() {});
-                alert("login failed");
-            }
-         $("#submitButton").removeAttr("disabled");
-        },"json");
-    } else {
-        navigator.notification.alert("You must enter a username and password", function() {});
-        $("#submitButton").removeAttr("disabled");
-    }
-    return false;
-}
- 
-function deviceReady() {
-	console.log("deviceReady");
-	$("#loginPage").on("pageinit",function() {
-		console.log("pageinit run");
-		$("#loginForm").on("submit",handleLogin);
-		checkPreAuth();
-	});
-	$.mobile.changePage("#loginPage");
-}
+$('#page_login_submit').live('click',function(){
+  var name = $('#page_login_name').val();
+  if (!name) { alert('Please enter your user name.'); return false; }
+  var pass = $('#page_login_pass').val();
+  if (!pass) { alert('Please enter your password.'); return false; }
+  
+  // BEGIN: drupal services user login (warning: don't use https if you don't have ssl setup)
+  $.ajax({
+      url: "http://203.113.130.218:50080/miniShop/?q=api/user/login.json",
+      type: 'post',
+      data: 'username=' + encodeURIComponent(name) + '&password=' + encodeURIComponent(pass),
+      dataType: 'json',
+      error: function(XMLHttpRequest, textStatus, errorThrown) {
+        alert('page_login_submit - failed to login');
+        console.log(JSON.stringify(XMLHttpRequest));
+        console.log(JSON.stringify(textStatus));
+        console.log(JSON.stringify(errorThrown));
+      },
+      success: function (data) {
+       $.mobile.changePage("maytinhban.html", "slideup");
+      }
+  });
+  // END: drupal services user login
+  return false;
+});

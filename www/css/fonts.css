@@ -3,7 +3,7 @@
 {
 	font-family: myFont;
 	src: url('fonts/Actionsh.ttf');
-    /*   url('fonts/Royalacid.ttf');  */
+      
     
 }
 
@@ -11,8 +11,40 @@ p.logo {
 	
 	font-size: 80px;
 	text-align:center;
-	font-family: myFont;
+	font-family: login;
 	font-style: italic;
 	color: rgba(255, 69, 0, 0.75);
 }
 
+p.header {
+	
+	font-size: 18px;
+	text-align:center; 
+	font-family: login;
+	font-style: italic;
+	color: white;
+}
+
+@font-face
+{
+	font-family: login;
+	src: 	url('fonts/MAGIMT__.ttf');
+			
+   
+}
+p.login {
+	
+	font-size: 40px;
+	text-align:center;
+	font-family: login;
+	font-style: italic;
+	color: black;
+}
+
+p.icon-label {
+	font-size: 15px;
+	text-align:center;
+	font-family: login;
+	font-style: bold;
+	color: green;
+}

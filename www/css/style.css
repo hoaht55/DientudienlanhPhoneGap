@@ -1,3 +1,8 @@
+.androidpaintfix {
+-webkit-transform: translate3d(0,0,0);
+transform: translate3d(0, 0, 0);
+}
+
 /*  style for details_dienlanh.html and detail_dientu.html*/
 .price1 {
 	color: red;
@@ -21,6 +26,7 @@
 .introtext {
 	float: left;
 	font-style: italic;
+	line-height: 40px;
 }
  
 .error{
@@ -35,7 +41,7 @@
 
 /*/*-------------------------style for home page --------------------*/
 
-
+/* 
 .ui-page {
     background: url(http://mobile.edu.vn/wp-content/uploads/2013/03/mauxanh.jpg) no-repeat fixed left bottom;
     -webkit-background-size: 100% 100%;
@@ -43,7 +49,7 @@
     -o-background-size: 100% 100%;
     background-size: cover;
 }
-
+ */
 
 
 /* .logo_dt {
@@ -64,3 +70,75 @@ font-family: myFont;
 src: url('Sansation_Light.ttf'),
      url('Sansation_Light.eot'); /* IE9+ */
 }
+
+
+/*-----------------------------*/
+
+.cartHeaders div{
+			color:#333;
+		}
+		.simpleCart_items{
+			float:left;
+			clear:left;
+			width:446px;
+			margin:20px;
+		}
+		.itemContainer{
+			clear:both;
+			width:543px;
+			padding:15px 0;
+			font-size:11px;
+			line-height:25px;
+			height:10px;
+		}
+		.itemImage{
+			float:left;
+			width:80px;
+		}
+		.itemImage img{
+			vertical-align:middle;
+		}
+		.itemName{
+			float:left;
+			width:160px;
+		}
+		.itemPrice{
+			float:left;
+			width:55px;
+			color:#418932;
+		}
+		.itemQuantity{
+			float:left;
+			width:105px;
+			vertical-align:middle;
+			text-align:center;
+		}
+		.itemQuantity input{
+			width:20px;
+			border:1px solid #ccc;
+			padding:3px 2px;
+			margin:0 auto;
+			display:block;
+			font-size:11px;
+		}
+		.itemTotal{
+			float:left;
+			color:#c23f26;
+			text-align:right;
+			width:45px;
+		}
+		.totalRow{
+			clear:both;
+			float:left;
+			margin-top:10px;
+		}
+		.totalItems{
+			float:left;
+			width:105px;
+			margin-left:295px;
+			text-align:center;
+		}
+		.totalPrice{
+			float:right;
+			text-align:right;
+		}

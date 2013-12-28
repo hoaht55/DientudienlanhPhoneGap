@@ -4,60 +4,75 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>jQuery Mobile Demos - Slide Panel</title>
+		<title>Máy tính cá nhân</title>
 		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
 		<link rel="stylesheet" href="css/style.css"/> 
+		<link rel="stylesheet" href="css.css"/> 
+		<link rel="stylesheet" href="css/fonts.css"/> 
 		<script type="text/javascript" charset="utf-8" src="js/cordova.js"></script>
 		<script type="text/javascript" src="js/main.js"></script>
 		<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
 		<script type="text/javascript" src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+		<script type="text/javascript" src="js/addtocart.js"></script>
+		<script type="text/javascript"  src="js/jquery.livequery.js"></script>
+		<style>
+			#desktop .ui-icon { background:  url(images/grid.png) 50% 50% no-repeat; background-size: 22px 20px; }
+			#laptop .ui-icon { background:  url(images/grid.png) 50% 50% no-repeat; background-size: 25px 17px; }
+			#tablet .ui-icon { background:  url(images/grid.png) 50% 50% no-repeat; background-size: 20px 20px; }
+		</style>
 
 	</head>
-	<body onload="readDatabasesLaptop()">
-		<div data-role="page" class="ui-responsive-panel">
+	
+	<body onload="readDatabasesLaptop() ">
+		<div data-role="page" class="ui-responsive-panel" >
 
-			<div data-role="header" data-theme="a">
-				<h1>Dòng sản phẩm</h1>
-				<a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>
-				<a href="#" onclick="goHome()" data-icon="home" data-iconpos="notext" data-direction="reverse">Home</a>
+			<div data-role="header" data-theme="b">
+				<p class="header">HomeShop</p>
+				<a href="#nav-panel"  >
+					<img src="images/align_just.png" alt="cart" class="ui-li-icon">
+				</a>
 				
-				<div data-role="navbar">
-					<ul>
-						<li><a href="#" onclick="goDesktop()" data-role="button" data-icon="grid" data-iconpos="notext" data-theme="b">Máy tính bàn</a></li>
-	                    <li><a href="#" onclick="goLaptop()" data-role="button" data-icon="grid" data-iconpos="notext" data-theme="b">Máy tính cá nhân</a></li>
-						<li><a href="#" onclick="goTablet()" data-role="button" data-icon="grid" data-iconpos="notext" data-theme="b">Máy tính bảng</a></li>
-	                   
-	                </ul> 
-	            </div>
+				<!--<a href="#" onclick="goHome()" >
+					<img src="images/home.png" alt="cart" class="ui-li-icon">
+				</a> -->
+	
+				<a href="#add-form"  >
+					<img src="images/user.png" alt="cart" class="ui-li-icon">
+				</a>
+				
 			</div><!-- /header -->
+			
 			<div data-role="content">
 				<div class="content-primary" id="maytinhcanhan" > 
-						<ul  data-role="listview" data-split-icon="gear" data-inset="true" data-filter="true" data-filter-placeholder="Search..." >
-						</ul> 
-				</div>
-			</div><!-- /content -->
+						<ul  data-role="listview" data-split-icon="gear" data-split-theme="d" data-inset="true" data-filter="true" data-filter-placeholder="Search..." >
+											
+						</ul> <!--/end listview-->
+						
+						<div data-role="popup" id="purchase" data-theme="d" data-overlay-theme="b" class="ui-content" style="max-width:340px;">
+							<h3>Bạn có muốn thêm vào giỏ hàng?</h3>
+						<!--	<p>Your download will begin immediately on your mobile device when you purchase.</p>-->
+							<a href="index.html" data-role="button" data-rel="back" data-theme="b" data-icon="check" data-inline="true" data-mini="true">Addtocart</a>
+							<a href="index.html" data-role="button" data-rel="back" data-inline="true" data-mini="true">Cancel</a>	
+						</div>
+				</div><!-- /end content-primary-->
+			</div>
+			<div data-role="panel" data-position="left" data-position-fixed="false" data-display="overlay" id="nav-panel" data-theme="b">
 
-			
-			
-			<style>
-				.nav-search .ui-btn-up-a {
-					background-image:none;
-					background-color:#333333;
-				}
-				.nav-search .ui-btn-inner {
-					border-top: 1px solid #888;
-					border-color: rgba(255, 255, 255, .1);
-				}
-            </style>
-			
-			<div data-role="panel" data-position="left" data-position-fixed="false" data-display="reveal" id="nav-panel" data-theme="a">
-
-				<ul data-role="listview" data-theme="d" data-inset="true" data-divider-theme="b" style="margin-top:-16px;" class="nav-search">
-					<li data-icon="delete" style="background-color:#111;">
-						<a href="#" data-rel="close">Close menu</a>
+				<ul data-role="listview" data-theme="d"  data-divider-theme="b" style="margin-top:-16px;" class="nav-search">
+				
+					<!--<li data-role="list-divider">Sản phẩm</li>-->
+					<li data-filtertext="wai-aria voiceover accessibility screen reader" >
+						<a onclick="goHome()">
+							<img src="images/home_w.png" alt="cart" class="ui-li-icon">
+							Trang chủ
+						</a>
 					</li>
-					
-					<li data-role="list-divider">Sản phẩm</li>
+					<li data-filtertext="wai-aria voiceover accessibility screen reader" >
+						<a onclick="goNewProduct()">
+							<img src="images/new.png" alt="cart" class="ui-li-icon">
+							Sản phẩm mới
+						</a>
+					</li>
 					<li data-filtertext="wai-aria voiceover accessibility screen reader">
 						<a onclick="goDesktop()">
 							<img src="images/107-widescreen.png" alt="cart" class="ui-li-icon">
@@ -70,17 +85,100 @@
 							Điện lạnh
 						</a>
 					</li>
+					
+				</ul><!-- /listview-->
+ 
+				<!-- panel content goes here -->
+			</div><!-- /panel -->
+			
+			<!--panel right -->
+			<div data-role="panel" data-position="right" data-position-fixed="false" data-display="overlay" id="add-form" data-theme="b">
+
+				<ul data-role="listview" data-theme="d"  data-divider-theme="b" style="margin-top:-16px;" class="nav-search">
+				
+					<li data-filtertext="wai-aria voiceover accessibility screen reader" >
+						<a onclick="goDesktop()">
+							<img src="images/key.png" alt="cart" class="ui-li-icon" >
+							Đăng nhập
+						</a>
+					</li>
+					
 					<li data-filtertext="wai-aria voiceover accessibility screen reader">
-						<a onclick="goFridge()" >
+						<a href="#page2" >
 							<img src="images/80-shopping-cart.png" alt="cart" class="ui-li-icon">
-							Giỏ hàng của bạn
+							Giỏ hàng
+						</a>
+					</li>
+					
+					<li data-filtertext="wai-aria voiceover accessibility screen reader">
+						<a onclick="goDesktop()">
+							<img src="images/support.png" alt="cart" class="ui-li-icon">
+							Hỗ trợ
+						</a>
+					</li>
+					<li data-filtertext="wai-aria voiceover accessibility screen reader">
+						<a onclick="goFridge()">
+							<img src="images/gear.png" alt="cart" class="ui-li-icon">
+							Quản lý thông tin cá nhân
+						</a>
+					</li>
+					
+					<li data-filtertext="wai-aria voiceover accessibility screen reader">
+						<a href="#page2" >
+							<img src="images/logout.png" alt="cart" class="ui-li-icon">
+							Thoát
 						</a>
 					</li>
 					
 				</ul><!-- /listview-->
-
-				<!-- panel content goes here -->
-			</div><!-- /panel -->
-		</div><!-- /page --> 
+				<!-- panel content goes here -->	
+			</div> <!--end panel -->
+			
+			<!-- tab bar with custom icons -->
+			<div data-role="footer" class="tabbar" data-position="fixed">
+				<div data-role="navbar" class="tabbar">
+					<ul>
+						<li>
+							<a href="#" id="desktop" onclick="goDesktop()" data-icon="custom" data-theme="b">Máy ảnh</a>
+						</li>
+	                    <li>
+							<a href="#" id="laptop"onclick="goLaptop()"  data-icon="custom" data-theme="b"  class="ui-btn-active">Máy tính cá nhân</a>
+						</li>
+						<li>
+							<a href="#" id="tablet" onclick="goTablet()" data-icon="custom" data-theme="b">Máy tính bảng</a>
+						</li>
+	                   
+	                </ul> 
+	            </div>
+			</div>		
+		</div><!-- /page1 --> 
+		
+		
+		<div data-role="page" id="page2">
+			<div data-role="header" data-theme="a">
+				<h1>Giỏ hàng của bạn</h1>
+				<a onclick="goBack()" data-icon="back" data-iconpos="notext" data-iconpos="notext">Back</a>
+			</div><!-- /header -->
+			<div data-role="content">
+				<div class="content-primary" id="left_bar" > 
+					<form action="#" id="cart_form" name="cart_form">
+					
+					<div class="cart-info"></div>
+					
+					<div class="cart-total">
+					
+						<b>Total Charges:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b> $<span>0</span>
+						
+						<input type="hidden" name="total-hidden-charges" id="total-hidden-charges" value="0" />
+					</div>
+					
+					<button type="submit" id="Submit">CheckOut</button>
+					
+					</form>
+						
+				</div><!-- /end content-primary-->
+				
+			</div><!--/end content-->	
+		</div><!-- /page2 -->
 	</body>
 </html>
