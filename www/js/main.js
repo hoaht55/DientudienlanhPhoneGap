@@ -99,7 +99,7 @@ function errorRead( error)
 
 }
 
-//--------------------------
+//--------------------------May tinh de ban---------------
 //display list desktop
 function querySuccessDesktop( tx,results )
 {
@@ -216,7 +216,7 @@ function queryDBProductsNew( tx )
 }
 
 //
-//--------------------------
+//--------------------------May tinh ca nhan-------------------
 //display list laptop
 function querySuccessLaptop( tx,results )
 {
@@ -260,7 +260,7 @@ function queryDBLaptop( tx )
 
 
 
-//-------------------------------------------
+//--------------------------------Máy tính bảng-----------------
 //display list tablets
 function querySuccessTablet( tx,results )
 {
@@ -302,7 +302,7 @@ function queryDBTablet( tx )
 	tx.executeSql('SELECT * FROM PRODUCTS', [], querySuccessTablet, errorCB);
 }
 
-//-------------------------------
+//-------------------------------Tủ lạnh-----------------
 //display list fridge
 function querySuccessFridge( tx,results )
 {
@@ -344,8 +344,179 @@ function queryDBFridge( tx )
 	tx.executeSql('SELECT * FROM PRODUCTS', [], querySuccessFridge, errorCB);
 }
 
+//-------------------------------Máy ảnh-----------------
+//display list fridge
+function querySuccessCamera( tx,results )
+{
+	
+	//display list fridge
+	$.mobile.showPageLoadingMsg(true);
+	$.each(results.rows,function(index){
+		var row = results.rows.item(index);
+		if (row["category_id"] == 7) {
+			$('#mayanh').children('ul').append(
+				'<li><a href="#'+row["id"]+'" data-rel="popup" data-position-to="window" data-transition="pop"><img src="http://203.113.130.218:50080/miniShop/sites/default/files-7.24/styles/product_medium/public/'+row["Image_product"]+'" class="ui-li-thumb" />'+
+              '<span class="title">'+row["title"]+ '</span>'+
+			    '<span class="price">'+'Giá:' + row["price"] + ' VNĐ' + '</span>'+
+			    //'<span class="price">'+ row["price"] + '</span>'+
+              /*'<p class="introtext">'+rowintrotext+'</p>'+*/
+				'<p class="introtext">'+'Số hàng trong kho: '+row["stock"]+'</p>'+
+			    '</a>'+
+			    '<div data-role="popup" id="'+row["id"]+'" class="ui-content mypopup" data-theme="b">'+
+				'<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>'+ '<div class="full_text">'+ row["detail_product"] +'</div>'+'</div>'+ 
+				'<a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop">Purchase album</a>' +
+				'</li>').listview('refresh');
+      }
+  });
+  $('div.mypopup').popup();
+	$.mobile.hidePageLoadingMsg();	
+}
+
+
+//read from data base
+function readDatabasesCamera() {
+	var db = window.openDatabase("Database", "1.0", "PhoneGap Demo", 2000000);
+	getJson();
+	db.transaction(queryDBCamera, errorRead);
+}
+
+
+function queryDBCamera( tx )
+{
+	tx.executeSql('SELECT * FROM PRODUCTS', [], querySuccessCamera, errorCB);
+}
+
 //
-//--------------------------------------
+
+//-------------------------------Máy ghi âm-----------------
+//display list fridge
+function querySuccessTapeMachine( tx,results )
+{
+	
+	//display list fridge
+	$.mobile.showPageLoadingMsg(true);
+	$.each(results.rows,function(index){
+		var row = results.rows.item(index);
+		if (row["category_id"] == 21) {
+			$('#mayghiam').children('ul').append(
+				'<li><a href="#'+row["id"]+'" data-rel="popup" data-position-to="window" data-transition="pop"><img src="http://203.113.130.218:50080/miniShop/sites/default/files-7.24/styles/product_medium/public/'+row["Image_product"]+'" class="ui-li-thumb" />'+
+              '<span class="title">'+row["title"]+ '</span>'+
+			    '<span class="price">'+'Giá:' + row["price"] + ' VNĐ' + '</span>'+
+			    //'<span class="price">'+ row["price"] + '</span>'+
+              /*'<p class="introtext">'+rowintrotext+'</p>'+*/
+				'<p class="introtext">'+'Số hàng trong kho: '+row["stock"]+'</p>'+
+			    '</a>'+
+			    '<div data-role="popup" id="'+row["id"]+'" class="ui-content mypopup" data-theme="b">'+
+				'<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>'+ '<div class="full_text">'+ row["detail_product"] +'</div>'+'</div>'+ 
+				'<a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop">Purchase album</a>' +
+				'</li>').listview('refresh');
+      }
+  });
+  $('div.mypopup').popup();
+	$.mobile.hidePageLoadingMsg();	
+}
+
+
+//read from data base
+function readDatabasesTapeMachine() {
+	var db = window.openDatabase("Database", "1.0", "PhoneGap Demo", 2000000);
+	getJson();
+	db.transaction(queryDBTapeMachine, errorRead);
+}
+
+
+function queryDBTapeMachine( tx )
+{
+	tx.executeSql('SELECT * FROM PRODUCTS', [], querySuccessTapeMachine, errorCB);
+}
+
+//-------------------------------Máy nghe nhạc-----------------
+//display list fridge
+function querySuccessHeadPhone( tx,results )
+{
+	
+	//display list fridge
+	$.mobile.showPageLoadingMsg(true);
+	$.each(results.rows,function(index){
+		var row = results.rows.item(index);
+		if (row["category_id"] == 20) {
+			$('#maynghenhac').children('ul').append(
+				'<li><a href="#'+row["id"]+'" data-rel="popup" data-position-to="window" data-transition="pop"><img src="http://203.113.130.218:50080/miniShop/sites/default/files-7.24/styles/product_medium/public/'+row["Image_product"]+'" class="ui-li-thumb" />'+
+              '<span class="title">'+row["title"]+ '</span>'+
+			    '<span class="price">'+'Giá:' + row["price"] + ' VNĐ' + '</span>'+
+			    //'<span class="price">'+ row["price"] + '</span>'+
+              /*'<p class="introtext">'+rowintrotext+'</p>'+*/
+				'<p class="introtext">'+'Số hàng trong kho: '+row["stock"]+'</p>'+
+			    '</a>'+
+			    '<div data-role="popup" id="'+row["id"]+'" class="ui-content mypopup" data-theme="b">'+
+				'<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>'+ '<div class="full_text">'+ row["detail_product"] +'</div>'+'</div>'+ 
+				'<a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop">Purchase album</a>' +
+				'</li>').listview('refresh');
+      }
+  });
+  $('div.mypopup').popup();
+	$.mobile.hidePageLoadingMsg();	
+}
+
+
+//read from data base
+function readDatabasesHeadPhone() {
+	var db = window.openDatabase("Database", "1.0", "PhoneGap Demo", 2000000);
+	getJson();
+	db.transaction(queryDBHeadPhone, errorRead);
+}
+
+
+function queryDBHeadPhone( tx )
+{
+	tx.executeSql('SELECT * FROM PRODUCTS', [], querySuccessHeadPhone, errorCB);
+}
+
+//-------------------------------Phụ kiện-----------------
+//display list fridge
+function querySuccessPhuKien( tx,results )
+{
+	
+	//display list fridge
+	$.mobile.showPageLoadingMsg(true);
+	$.each(results.rows,function(index){
+		var row = results.rows.item(index);
+		if (row["category_id"] == 20) {
+			$('#phukien').children('ul').append(
+				'<li><a href="#'+row["id"]+'" data-rel="popup" data-position-to="window" data-transition="pop"><img src="http://203.113.130.218:50080/miniShop/sites/default/files-7.24/styles/product_medium/public/'+row["Image_product"]+'" class="ui-li-thumb" />'+
+              '<span class="title">'+row["title"]+ '</span>'+
+			    '<span class="price">'+'Giá:' + row["price"] + ' VNĐ' + '</span>'+
+			    //'<span class="price">'+ row["price"] + '</span>'+
+              /*'<p class="introtext">'+rowintrotext+'</p>'+*/
+				'<p class="introtext">'+'Số hàng trong kho: '+row["stock"]+'</p>'+
+			    '</a>'+
+			    '<div data-role="popup" id="'+row["id"]+'" class="ui-content mypopup" data-theme="b">'+
+				'<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>'+ '<div class="full_text">'+ row["detail_product"] +'</div>'+'</div>'+ 
+				'<a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop">Purchase album</a>' +
+				'</li>').listview('refresh');
+      }
+  });
+  $('div.mypopup').popup();
+	$.mobile.hidePageLoadingMsg();	
+}
+
+
+//read from data base
+function readDatabasesPhuKien() {
+	var db = window.openDatabase("Database", "1.0", "PhoneGap Demo", 2000000);
+	getJson();
+	db.transaction(queryDBPhuKien, errorRead);
+}
+
+
+function queryDBPhuKien( tx )
+{
+	tx.executeSql('SELECT * FROM PRODUCTS', [], querySuccessPhuKien, errorCB);
+}
+
+
+//
+//--------------------------------------Máy giặt-------------------
 //display list washer
 function querySuccessWasher( tx,results )
 {
@@ -433,6 +604,32 @@ function goHome() {
 	window.location.assign("home.html");
 }
 
+// go page camera.html
+function goCamera() {
+	window.location.assign("mayanh.html");
+}
+
+//go page mayghiam.html
+function goTapeMachine() {
+	window.location.assign("mayghiam.html");
+}
+
+//go page maynghenhac.html
+function goHeadPhone() {
+	window.location.assign("maynghenhac.html");
+}
+
+function goPhuKien() {
+	window.location.assign("phukien.html");
+}
+//go to page spare
+function goDesktop() {
+	window.location.assign("maytinhban.html");
+}
+
+function goDesktop() {
+	window.location.assign("maytinhban.html");
+}
 //go page Desktop
 function goDesktop() {
 	window.location.assign("maytinhban.html");

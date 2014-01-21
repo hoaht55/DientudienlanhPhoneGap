@@ -16,14 +16,15 @@
 		<script type="text/javascript" src="js/addtocart.js"></script>
 		<script type="text/javascript"  src="js/jquery.livequery.js"></script>
 		<style>
-			#desktop .ui-icon { background:  url(images/grid.png) 50% 50% no-repeat; background-size: 22px 20px; }
-			#laptop .ui-icon { background:  url(images/grid.png) 50% 50% no-repeat; background-size: 25px 17px; }
-			#tablet .ui-icon { background:  url(images/grid.png) 50% 50% no-repeat; background-size: 20px 20px; }
+			#camera .ui-icon { background:  url(images/grid.png) 50% 50% no-repeat; background-size: 22px 20px; }
+			#tapeMachine .ui-icon { background:  url(images/grid.png) 50% 50% no-repeat; background-size: 25px 17px; }
+			#headPhone .ui-icon { background:  url(images/grid.png) 50% 50% no-repeat; background-size: 25px 17px; }
+			#phuKien .ui-icon { background:  url(images/grid.png) 50% 50% no-repeat; background-size: 22px 22px; }
 		</style>
 
 	</head>
 	
-	<body onload="readDatabasesDesktop() ">
+	<body onload="readDatabasesCamera() ">
 		<div data-role="page" class="ui-responsive-panel" >
 
 			<div data-role="header" data-theme="b">
@@ -42,7 +43,7 @@
 				
 			</div><!-- /header -->
 			<div data-role="content">
-				<div class="content-primary" id="wrap" > 
+				<div class="content-primary" id="mayanh" > 
 						<ul  data-role="listview" data-split-icon="gear" data-split-theme="d" data-inset="true" data-filter="true" data-filter-placeholder="Search..." >
 											
 						</ul> <!--/end listview-->
@@ -57,9 +58,9 @@
 			</div>
 			<div data-role="panel" data-position="left" data-position-fixed="false" data-display="overlay" id="nav-panel" data-theme="b">
 
-				<ul data-role="listview" data-theme="d"  data-divider-theme="b" style="margin-top:-16px;" class="nav-search">
+				<ul data-role="listview" data-theme="d"  data-divider-theme="d" style="margin-top:-16px;" class="nav-search">
 				
-					<!--<li data-role="list-divider">Sản phẩm</li>-->
+					<!-- <li data-role="list-divider" role="heading">Đóng</li> -->
 					<li data-filtertext="wai-aria voiceover accessibility screen reader" >
 						<a onclick="goHome()">
 							<img src="images/home_w.png" alt="cart" class="ui-li-icon">
@@ -72,16 +73,64 @@
 							Sản phẩm mới
 						</a>
 					</li>
+					
+					<!-- Điện tử -->
+					<li data-role="list-divider" role="heading">Điện tử</li>
 					<li data-filtertext="wai-aria voiceover accessibility screen reader">
 						<a onclick="goDesktop()">
 							<img src="images/107-widescreen.png" alt="cart" class="ui-li-icon">
-							Điện tử
+							Kĩ thuật số
+						</a>
+					</li>
+					<li data-filtertext="wai-aria voiceover accessibility screen reader">
+						<a onclick="goDesktop()">
+							<img src="images/107-widescreen.png" alt="cart" class="ui-li-icon">
+							Máy tính cá nhân
+						</a>
+					</li>
+					<li data-filtertext="wai-aria voiceover accessibility screen reader">
+						<a onclick="goDesktop()">
+							<img src="images/107-widescreen.png" alt="cart" class="ui-li-icon">
+							Máy tính và link kiện
+						</a>
+					</li>
+					<li data-filtertext="wai-aria voiceover accessibility screen reader">
+						<a onclick="goDesktop()">
+							<img src="images/107-widescreen.png" alt="cart" class="ui-li-icon">
+							Máy tính bảng
+						</a>
+					</li>
+					
+					<!-- Điện lạnh -->
+					<li data-role="list-divider" role="heading">Điện lạnh</li>
+					<li data-filtertext="wai-aria voiceover accessibility screen reader">
+						<a onclick="goFridge()">
+							<img src="images/fridge.png" alt="cart" class="ui-li-icon">
+							Tủ đông
 						</a>
 					</li>
 					<li data-filtertext="wai-aria voiceover accessibility screen reader">
 						<a onclick="goFridge()">
 							<img src="images/fridge.png" alt="cart" class="ui-li-icon">
-							Điện lạnh
+							Tủ mát
+						</a>
+					</li>
+					<li data-filtertext="wai-aria voiceover accessibility screen reader">
+						<a onclick="goFridge()">
+							<img src="images/fridge.png" alt="cart" class="ui-li-icon">
+							Máy giặt
+						</a>
+					</li>
+					<li data-filtertext="wai-aria voiceover accessibility screen reader">
+						<a onclick="goFridge()">
+							<img src="images/fridge.png" alt="cart" class="ui-li-icon">
+							Tủ lạnh
+						</a>
+					</li>
+					<li data-filtertext="wai-aria voiceover accessibility screen reader">
+						<a onclick="goFridge()">
+							<img src="images/fridge.png" alt="cart" class="ui-li-icon">
+							Điều hòa
 						</a>
 					</li>
 					
@@ -138,13 +187,16 @@
 				<div data-role="navbar" class="tabbar">
 					<ul>
 						<li>
-							<a href="#" id="desktop" onclick="goDesktop()" data-icon="custom" data-theme="b">Máy ảnh</a>
+							<a href="#" id="camera" onclick="goCamera()" data-icon="custom" data-theme="b">Máy ảnh</a>
 						</li>
 	                    <li>
-							<a href="#" id="laptop"onclick="goLaptop()"  data-icon="custom" data-theme="b"  class="ui-btn-active">Máy tính cá nhân</a>
+							<a href="#" id="tapeMachine"onclick="goTapeMachine()"  data-icon="custom" data-theme="b" >Máy ghi âm</a>
 						</li>
 						<li>
-							<a href="#" id="tablet" onclick="goTablet()" data-icon="custom" data-theme="b">Máy tính bảng</a>
+							<a href="#" id="headPhone" onclick="goHeadPhone()" data-icon="custom" data-theme="b">Máy nghe nhạc</a>
+						</li>
+						<li>
+							<a href="#" id="phuKien" onclick="goPhuKien()" data-icon="custom" data-theme="b">Phụ kiện</a>
 						</li>
 	                   
 	                </ul> 

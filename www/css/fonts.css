@@ -25,6 +25,15 @@ p.header {
 	color: white;
 }
 
+p.header1 {
+	
+	font-size: 30px;
+	text-align:center; 
+	font-family: login;
+	font-style: italic;
+	color: white;
+}
+
 @font-face
 {
 	font-family: login;
